@@ -1,6 +1,6 @@
 
 import unittest
-from file import File
+from jaguar_backend.file import File
 
 print("Testing:" + File.__doc__)
         

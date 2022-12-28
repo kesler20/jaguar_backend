@@ -1,7 +1,7 @@
 
 from typing import List, Any, Union, Dict, Optional, Tuple
 from dataclasses import dataclass
-from _types import Path
+from jaguar_backend._types import Path
         
 @dataclass
 class File:

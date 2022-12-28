@@ -2,7 +2,7 @@
 /app/
 /aws/
 /csv/
-/pub_sub-env/
+/jaguar_backend-env/
 __pycache__
 fastapi.pem
 putty.ppk

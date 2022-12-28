@@ -1,6 +1,6 @@
 
 import unittest
-from operatingsysteminterface import OperatingSystemInterface
+from jaguar_backend.operatingsysteminterface import OperatingSystemInterface
 
 print("Testing:" + OperatingSystemInterface.__doc__)
         
