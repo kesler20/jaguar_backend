@@ -1,15 +1,15 @@
 
 import unittest
-from amplifyapplication import AmplifyApplication
+from amplify_application import AmplifyApplication
 
 print("Testing:" + AmplifyApplication.__doc__)
-        
 
-class Test_AmplifyApplication(unittest.TestCase):        
+
+class Test_AmplifyApplication(unittest.TestCase):
     """
-    
+
     testing the side effects of the AmplifyApplication class
-    
+
     Example of how those tests are run
     ---
     given a method ``append_row`` which takes the following arguments
@@ -31,17 +31,17 @@ class Test_AmplifyApplication(unittest.TestCase):
     self.assertTrue(test_result.equals(side_effect_output[0]))    
     ```
     """
-    
-        
+
     def setUp(self):
         self.test_client = AmplifyApplication()
+
     def test_side_effects___init__(self):
         """
         test the __init__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -57,15 +57,15 @@ class Test_AmplifyApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__init__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_update_amplify_application(self):
         """
         test the update_amplify_application method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -81,15 +81,15 @@ class Test_AmplifyApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.update_amplify_application()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_modify_amplify_application(self):
         """
         test the modify_amplify_application method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -105,15 +105,15 @@ class Test_AmplifyApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.modify_amplify_application()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_initialize_amplify_application(self):
         """
         test the initialize_amplify_application method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -129,15 +129,15 @@ class Test_AmplifyApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.initialize_amplify_application()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_push_to_amplify(self):
         """
         test the push_to_amplify method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -153,11 +153,11 @@ class Test_AmplifyApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.push_to_amplify()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def tearDown(self):
         pass
-        
+
+
 if __name__ == "__main__":
     unittest.main()
-        

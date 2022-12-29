@@ -1,15 +1,15 @@
 
 import unittest
-from githubrepository import GithubRepository
+from github_repository import GithubRepository
 
 print("Testing:" + GithubRepository.__doc__)
-        
 
-class Test_GithubRepository(unittest.TestCase):        
+
+class Test_GithubRepository(unittest.TestCase):
     """
-    
+
     testing the side effects of the GithubRepository class
-    
+
     Example of how those tests are run
     ---
     given a method ``append_row`` which takes the following arguments
@@ -31,17 +31,17 @@ class Test_GithubRepository(unittest.TestCase):
     self.assertTrue(test_result.equals(side_effect_output[0]))    
     ```
     """
-    
-        
+
     def setUp(self):
         self.test_client = GithubRepository()
+
     def test_side_effects___init__(self):
         """
         test the __init__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -57,15 +57,15 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__init__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_test_and_push_to_github(self):
         """
         test the test_and_push_to_github method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -81,15 +81,15 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.test_and_push_to_github()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_push_to_github(self):
         """
         test the push_to_github method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -105,15 +105,15 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.push_to_github()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_push_new_repo_to_github(self):
         """
         test the push_new_repo_to_github method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -129,15 +129,15 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.push_new_repo_to_github()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_push_new_branch_to_github(self):
         """
         test the push_new_branch_to_github method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -153,12 +153,12 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.push_new_branch_to_github()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_style_commit_message(self):
         """
         test the style_commit_message method which accepts the following arguments:
-        
+
         ---
         Parameters:
         commit_message : str
@@ -177,11 +177,11 @@ class Test_GithubRepository(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.style_commit_message()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def tearDown(self):
         pass
-        
+
+
 if __name__ == "__main__":
     unittest.main()
-        

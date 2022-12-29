@@ -1,15 +1,15 @@
 
 import unittest
-from reactapplication import ReactApplication
+from react_application import ReactApplication
 
 print("Testing:" + ReactApplication.__doc__)
-        
 
-class Test_ReactApplication(unittest.TestCase):        
+
+class Test_ReactApplication(unittest.TestCase):
     """
-    
+
     testing the side effects of the ReactApplication class
-    
+
     Example of how those tests are run
     ---
     given a method ``append_row`` which takes the following arguments
@@ -31,17 +31,17 @@ class Test_ReactApplication(unittest.TestCase):
     self.assertTrue(test_result.equals(side_effect_output[0]))    
     ```
     """
-    
-        
+
     def setUp(self):
         self.test_client = ReactApplication()
+
     def test_side_effects___init__(self):
         """
         test the __init__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -57,12 +57,12 @@ class Test_ReactApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__init__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_initialise_env_file(self):
         """
         test the initialise_env_file method which accepts the following arguments:
-        
+
         ---
         Parameters:
         *args : Tuple[Any]
@@ -81,12 +81,12 @@ class Test_ReactApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.initialise_env_file()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_initialise_npm_process(self):
         """
         test the initialise_npm_process method which accepts the following arguments:
-        
+
         ---
         Parameters:
         *args : Tuple[Any]
@@ -105,11 +105,11 @@ class Test_ReactApplication(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.initialise_npm_process()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def tearDown(self):
         pass
-        
+
+
 if __name__ == "__main__":
     unittest.main()
-        

@@ -1,15 +1,15 @@
 
 import unittest
-from jaguar_backend.operatingsysteminterface import OperatingSystemInterface
+from jaguar_backend.operating_system_interface import OperatingSystemInterface
 
 print("Testing:" + OperatingSystemInterface.__doc__)
-        
 
-class Test_OperatingSystemInterface(unittest.TestCase):        
+
+class Test_OperatingSystemInterface(unittest.TestCase):
     """
-    
+
     testing the side effects of the OperatingSystemInterface class
-    
+
     Example of how those tests are run
     ---
     given a method ``append_row`` which takes the following arguments
@@ -31,17 +31,17 @@ class Test_OperatingSystemInterface(unittest.TestCase):
     self.assertTrue(test_result.equals(side_effect_output[0]))    
     ```
     """
-    
-        
+
     def setUp(self):
         self.test_client = OperatingSystemInterface()
+
     def test_side_effects___init__(self):
         """
         test the __init__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -57,15 +57,15 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__init__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects___enter__(self):
         """
         test the __enter__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -81,15 +81,15 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__enter__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects___exit__(self):
         """
         test the __exit__ method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -105,15 +105,15 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.__exit__()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_gcu(self):
         """
         test the gcu method which accepts the following arguments:
-        
+
         ---
         Parameters:
-        
+
 
         ---
         Returns:
@@ -129,12 +129,12 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.gcu()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_copy_file_from_folder(self):
         """
         test the copy_file_from_folder method which accepts the following arguments:
-        
+
         ---
         Parameters:
         file : str, source_folder : str="jaguar"
@@ -153,12 +153,12 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.copy_file_from_folder()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_move_folder_resources(self):
         """
         test the move_folder_resources method which accepts the following arguments:
-        
+
         ---
         Parameters:
         destination_path : str
@@ -177,12 +177,12 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.move_folder_resources()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def test_side_effects_read_word_in_directory(self):
         """
         test the read_word_in_directory method which accepts the following arguments:
-        
+
         ---
         Parameters:
         word : str
@@ -201,11 +201,11 @@ class Test_OperatingSystemInterface(unittest.TestCase):
 
         # test that the side effect is expected
         test_result = self.test_client.read_word_in_directory()
-        self.assertEqual(test_result,side_effect_output[0])
-    
+        self.assertEqual(test_result, side_effect_output[0])
+
     def tearDown(self):
         pass
-        
+
+
 if __name__ == "__main__":
     unittest.main()
-        

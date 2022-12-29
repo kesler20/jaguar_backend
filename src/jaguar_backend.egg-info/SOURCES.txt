@@ -8,8 +8,8 @@ src/jaguar_backend/_types.py
 src/jaguar_backend/file.py
 src/jaguar_backend/main.py
 src/jaguar_backend/manual_test_file.py
-src/jaguar_backend/manual_test_operatingsysteminterface.py
-src/jaguar_backend/operatingsysteminterface.py
+src/jaguar_backend/manual_test_operating_system_interface.py
+src/jaguar_backend/operating_system_interface.py
 src/jaguar_backend/py.typed
 src/jaguar_backend.egg-info/PKG-INFO
 src/jaguar_backend.egg-info/SOURCES.txt
