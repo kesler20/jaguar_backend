@@ -7,7 +7,7 @@ class ReactApplication(Protocol):
     def __init__(self) -> None:
         ...
           
-    def initialise_env_file(self, *args : Tuple[Any]) -> :
+    def initialise_env_file(self, *args : Tuple[Any]) -> None:
         ...
           
     def initialise_npm_process(self, *args : Tuple[Any]) -> None:
@@ -21,13 +21,13 @@ class AmplifyApplication(Protocol):
     def __init__(self) -> None:
         ...
           
-    def update_amplify_application(self) -> :
+    def update_amplify_application(self) -> None:
         ...
           
-    def modify_amplify_application(self) -> :
+    def modify_amplify_application(self) -> None:
         ...
           
-    def initialize_amplify_application(self) -> :
+    def initialize_amplify_application(self) -> None:
         ...
           
     def push_to_amplify(self) -> None:

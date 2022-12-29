@@ -1,20 +1,20 @@
 
 from typing import List, Any, Union, Dict, Optional, Tuple
-from dataclasses import dataclass
 from jaguar_backend._types import Path
-        
-@dataclass
+import json
+import os
+
 class File:
     """File is a class"""
     
     filename : Path
     
     def __init__(self, filename : Path) -> None:
-        """__init__ has the following params
-        
+        """The class has the following properties
+
         Parameters
         ---
-            
+
         filename Path
             to be passed as parameter 2
         
@@ -22,13 +22,15 @@ class File:
         ---
         result: None
         """
-        ...
+        self.filename = filename.as_posix()
                           
     
     def read(self) -> str:
         """read has the following params
         """
-        ...        
+        with open(self.filename, "r") as file:
+            content = file.read()
+        return content        
                   
     
     def append(self, content : str) -> None:
@@ -44,7 +46,8 @@ class File:
         ---
         result: None
         """
-        ...
+        with open(self.filename, "a") as file:
+            file.write(content)
                           
     
     def write(self, content : str) -> None:
@@ -60,19 +63,24 @@ class File:
         ---
         result: None
         """
-        ...
+        with open(self.filename, "w") as file:
+            file.write(content)
                           
     
     def readlines(self) -> 'list[str]':
         """readlines has the following params
         """
-        ...        
+        with open(self.filename, "r") as file:
+            content = file.readlines()
+        return content        
                   
     
     def get_json(self) -> Any:
         """get_json has the following params
         """
-        ...        
+        with open(self.filename, "r") as json_file:
+            content = json.loads(json_file.read())
+        return content       
                   
     
     def write_json(self, content: Union[Dict[str, Any], List[Any]]) -> None:
@@ -88,7 +96,9 @@ class File:
         ---
         result: None
         """
-        ...
+        with open(self.filename, "w") as json_file:
+            json_file.write(json.dumps(content, indent=2))
+
                           
     
     def writeline(self, content : str) -> None:
@@ -104,17 +114,31 @@ class File:
         ---
         result: None
         """
-        ...
+        with open(self.filename, "w") as file:
+            file.write(f"{content}\n")
                           
     
-    def read_line_by_condition(self) -> 'list[str]':
+    def read_line_by_condition(self, condition: str ) -> 'list[str]':
         """read_line_by_condition has the following params
+        
+        Parameters
+        ---
+
+        condition : str
+            condition should be a function which is applied
+            to filter through the list of the lines of the file
+        
+        Returns
+        ---
+        Result : list[str]
         """
-        ...        
-                  
+        with open(self.filename, "w") as file:
+            content = file.readlines()
+
+        return list(filter(condition, content))       
     
     def delete(self) -> None:
         """delete has the following params
         """
-        ...        
+        os.remove(self.filename)        
                   
