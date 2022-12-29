@@ -15,6 +15,26 @@ classDiagram
    OperatingSystemInterface : + move_folder_resources() None
    OperatingSystemInterface : + read_word_in_directory() list
 
+   GithubRepository <|-- object
+   GithubRepository : + __init__() None
+   GithubRepository : + test_and_push_to_github() None
+   GithubRepository : + push_to_github() None
+   GithubRepository : + push_new_repo_to_github() None
+   GithubRepository : + push_new_branch_to_github() 
+   GithubRepository : + style_commit_message() str
+
+   ReactApplication <|-- object
+   ReactApplication : + __init__() None
+   ReactApplication : + initialise_env_file() 
+   ReactApplication : + initialise_npm_process() None
+
+   AmplifyApplication <|-- object
+   AmplifyApplication : + __init__() None
+   AmplifyApplication : + update_amplify_application() 
+   AmplifyApplication : + modify_amplify_application() 
+   AmplifyApplication : + initialize_amplify_application() 
+   AmplifyApplication : + push_to_amplify() 
+
    File <|-- object
    File : + filename Path
    File : + __init__() None
@@ -71,6 +91,7 @@ gh repo edit https://github.com/kesler20/betting_bot , --description "a script t
 - [ ] Merge a new-feature branch onto the main and delete the new feature branch automatically when all the tests are passed
 - [ ] Allow the user to call the help function from their repo, this can be implemented by either using the get requests in python and exposing the service of the cli using fastapi other things like files can also be accessed like this
 - [ ] Can you get the list of repos that you have on github from the cli tool
+- [ ] make it easy to build an application from the given templates
 
 ### Workflow.py
 

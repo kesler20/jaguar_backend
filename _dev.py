@@ -137,75 +137,7 @@ class File:
     def delete(self) -> None:
         '''signature description'''
         os.remove(self.filename)
-
-class FileSynchronizer:
-
-    def __init__(self) -> None:
-        self.all_directories = os.listdir(r"C:\Users\CBE-User 05\protocol")
-        self.default_files_to_copy = [
-            r"interfaces\os_interface.py", "workflow.py"]
-
-    def synchronize_files_from_jaguar(self, *args):
-        '''
-        to separate between files and folders put a 'f filename.extension' in front of your files
-        '''
-        directories_to_copy_to, files_to_copy = self.sort_args(args)
-
-        # now you can push all of the changes to github within the protocol folder as follows
-        for dir in directories_to_copy_to:
-            if dir == "jaguar":
-                pass
-            else:
-                with OperatingSystemInterface(os.path.join(r"C:\Users\CBE-User 05\protocol", dir)) as op_sys:
-                    self.create_folders_where_needed(dir, files_to_copy)
-
-                osi = OperatingSystemInterface(
-                    os.path.join(r"C:\Users\CBE-User 05\protocol", dir))
-                for file in files_to_copy:
-                    osi.copy_file_from_folder(file)
-
-    def create_folders_where_needed(self, dir, files_to_copy: list[str]):
-        folders = []
-        for file in files_to_copy:
-            for folder in file.split(r"\ ".replace(" ", ""))[:-1]:
-                folders.append(folder)
-        most_deeply_nested_folder = os.path.join(
-            r"C:\Users\CBE-User 05\protocol", dir, **folders)
-        if not os.path.isdir(most_deeply_nested_folder):
-            os.system(f"mkdir {most_deeply_nested_folder}")
-            print(most_deeply_nested_folder,
-                  os.path.isdir(most_deeply_nested_folder))
-
-    def sort_args(self, *args):
-        if len(args) == 0:
-            directories_to_copy_to = self.all_directories
-            files_to_copy = self.default_files_to_copy
-        else:
-            directories_to_copy_to = []
-            files_to_copy = []
-            for arg in args:
-                if arg.startswith("f "):
-                    files_to_copy.append(arg)
-                else:
-                    directories_to_copy_to.append(arg)
-        return directories_to_copy_to, files_to_copy
-
-    def search_for_dir(dir, dirs: list[str]):
-        # 'we want to get this kind of behavior to traverse the file system
-        # if os.path.isdir(os.path.join(r"C:\Users\CBE-User 05\protocol", dir, dirs[0])):
-        #   if os.path.isdir(os.path.join(r"C:\Users\CBE-User 05\protocol", dir, dirs[0],dirs[1]))
-
-        # this can be emulated by appending the dirs that exists in the list of the arguments and doing so until
-        # we do not find a dir'
-
-        i = 0
-        folders = [dirs[i]]
-        while i < len(dirs) - 1:
-            if os.path.isdir(os.path.join(r"C:\Users\CBE-User 05\protocol", dir, *folders)):
-                i += 1
-                folders.append(dirs[i])
-        return folders
-
+    
 class WorkflowRepresentation:
 
     def __init__(self) -> None:
@@ -340,72 +272,6 @@ class AmplifyApplication:
             self.workflow_ui.pp(f"pull locally ⤵️")
             os.system("amplify pull")
 
-    def sync_env_variable_to_aws_exports(self):
-        AWS_CONFIG_DATA = []
-
-        source_dir = os.path.join(os.getcwd(), "src")
-        print(f"----------- looking for the aws-exports.js in {source_dir} 🔎")
-        time.sleep(1)
-        with open(f"{source_dir}/aws-exports.js", "r") as aws_config_file, open(f"{os.getcwd()}/aws-exports.json", "w") as write_file:
-            content = aws_config_file.readlines()
-
-            print("-------------------------- aws-export.js found ✅")
-            print(aws_config_file.read())
-            time.sleep(1)
-            # filter the first three lines
-            clean_content = list(
-                filter(lambda line: content.index(line) > 3, content))
-            clean_content.insert(0, "[{")
-
-            # filter the last two lines
-            clean_content = list(filter(lambda line: clean_content.index(
-                line) < len(clean_content) - 2, clean_content))
-            clean_content.append("}]")
-
-            print("--------------------- cleaning up the file to make a json 🧹")
-            time.sleep(1)
-
-            for index, line in enumerate(clean_content):
-                write_file.write(line)
-
-        with open(f"{os.getcwd()}/aws-exports.json", "r") as read_config_file:
-            content: 'list[dict]' = json.loads(read_config_file.read())
-            keys = list(content[0].keys())
-
-            print(
-                f"----------------------- converting the parsed dictionary to .env variables ⚙️")
-            time.sleep(1)
-            print(content[0])
-
-            print("------------------------  ---> ")
-            for k in keys:
-                upper_k = k.upper()
-                AWS_CONFIG_DATA.append(
-                    f'REACT_APP_{upper_k} = "{content[0][k]}"')
-            print(f'REACT_APP_{upper_k} = "{content[0][k]}"')
-
-        print("------------------------------- getting the current .env file ✅")
-        time.sleep(1)
-        with open(".env", "r+") as env_file:
-            content = env_file.readlines()
-            clean_content = list(
-                filter(lambda line: line.find("REACT_APP_AWS") == -1, content))
-            for line in clean_content:
-                print(line)
-
-            for variable in AWS_CONFIG_DATA:
-                clean_content.append(variable)
-
-        print("---------------------------- writing to the final .env file ✏️")
-        time.sleep(1)
-        with open(".env", "w") as write_to_env_file:
-            clean_content = list(set(clean_content))
-            for line in clean_content:
-                line = line.replace("\n", "")
-                print(line)
-                write_to_env_file.write(f'{line}\n')
-            os.remove("aws-exports.json")
-
     def push_to_amplify(self, *args):
         '''
         In order to publish to amplify make sure that you have initialised the correct application
@@ -444,12 +310,12 @@ class ReactApplication:
     def __init__(self) -> None:
         self.workflow_ui = WorkflowRepresentation()
 
-    def initialise_env_file(self, *args):
+    def initialise_env_file(self, *args : Tuple[Any]):
         with open(".env", "w") as env, open(os.path.join(osi.gcu(), "Protocol", "jaguar", "config.py"), "r") as configs:
             content = configs.read()
             env.write(content)
 
-    def initialise_npm_process(self, *args) -> None:
+    def initialise_npm_process(self, *args : Tuple[Any]) -> None:
         '''signature description'''
 
         target_directory = os.getcwd()
@@ -625,28 +491,27 @@ if __name__ == "__main__":
     react = ReactApplication()
     git = GithubRepository()
     workflow_ui = WorkflowRepresentation()
-    synch = FileSynchronizer()
 
     if sys.argv[1] == "git":
         if sys.argv[2] == "t":
-            git.test_and_push_to_github(*sys.argv[argument_number:])
+            git.test_and_push_to_github(*sys.argv[2:])
         elif sys.argv[2] == "init":
-            git.push_new_repo_to_github(sys.argv[argument_number:])
+            git.push_new_repo_to_github(sys.argv[2:])
         else:
-            git.push_to_github(*sys.argv[argument_number:])
+            git.push_to_github(*sys.argv[2:])
 
     elif sys.argv[1] == "aws":
         if sys.argv[2] == "init":
-            amplify.initialize_amplify_application(sys.argv[argument_number:])
+            amplify.initialize_amplify_application(sys.argv[2:])
         elif sys.argv[2] == "edit":
-            amplify.modify_amplify_application(sys.argv[argument_number:])
+            amplify.modify_amplify_application(sys.argv[2:])
         elif sys.argv[2] == "u":
-            amplify.update_amplify_application(sys.argv[argument_number:])
+            amplify.update_amplify_application(sys.argv[2:])
         elif sys.argv[2] == "sync":
             amplify.sync_env_variable_to_aws_exports(
-                sys.argv[argument_number:])
+                sys.argv[2:])
         elif sys.argv[2] == "publish":
-            amplify.push_to_amplify(sys.argv[argument_number:])
+            amplify.push_to_amplify(sys.argv[2:])
         else:
             workflow_ui.describe("aws")
             print("these are the categories that you can select")
@@ -655,17 +520,14 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == "react":
         if sys.argv[2] == "init":
-            react.initialise_npm_process(*sys.argv[argument_number:])
+            react.initialise_npm_process(*sys.argv[2:])
         elif sys.argv[2] == "config":
-            react.initialise_env_file(*sys.argv[argument_number:])
+            react.initialise_env_file(*sys.argv[2:])
         else:
             print(
                 'running python workflow.py "react" "config" will paste the .env file in the root dir')
             print(
                 'running python workflow.py "react" "init" will initialize the react application')
-
-    elif sys.argv[1] == "sync":
-        synch.synchronize_files_from_jaguar(sys.argv[1:])
 
     elif sys.argv[1] == "push":
         for dir in os.listdir(r"C:\Users\CBE-User 05\protocol"):

@@ -2,11 +2,37 @@
 from typing import TypedDict, List, Any, Union, Dict, Tuple, Optional, Protocol
 import os
 
+class ReactApplication(Protocol):   
+        
+    def __init__(self) -> None:
+        ...
+          
+    def initialise_env_file(self, *args : Tuple[Any]) -> :
+        ...
+          
+    def initialise_npm_process(self, *args : Tuple[Any]) -> None:
+        ...
 
 class Path(Protocol):
     ...
             
-
+class AmplifyApplication(Protocol):   
+        
+    def __init__(self) -> None:
+        ...
+          
+    def update_amplify_application(self) -> :
+        ...
+          
+    def modify_amplify_application(self) -> :
+        ...
+          
+    def initialize_amplify_application(self) -> :
+        ...
+          
+    def push_to_amplify(self) -> None:
+        ...
+          
 class OperatingSystemInterface(Protocol):   
         
     def __init__(self) -> None:
@@ -63,3 +89,20 @@ class File(Protocol):
     def delete(self) -> None:
         ...
         
+class GithubRepository(Protocol):   
+        
+    def test_and_push_to_github(self) -> None:
+        ...
+          
+    def push_to_github(self) -> None:
+        ...
+          
+    def push_new_repo_to_github(self) -> None:
+        ...
+          
+    def push_new_branch_to_github(self) -> None:
+        ...
+          
+    def style_commit_message(self, commit_message : str) -> str:
+        ...
+          
