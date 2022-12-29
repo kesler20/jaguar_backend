@@ -1,8 +1,8 @@
 
 from typing import List, Any, Union, Dict, Optional, Tuple
 from dataclasses import dataclass
-from _types import *
-from _base import WorkflowRepresentation
+from jaguar_backend._types import *
+from jaguar_backend._base import WorkflowRepresentation
 
 
 @dataclass

@@ -1,8 +1,8 @@
 
 from typing import List, Any, Union, Dict, Optional, Tuple
-from jaguar_backend._types import Path
 import json
 import os
+from jaguar_backend._types import Path
 
 class File:
     """File is a class"""
