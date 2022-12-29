@@ -93,7 +93,7 @@ gh repo edit https://github.com/kesler20/betting_bot , --description "a script t
 - [ ] Can you get the list of repos that you have on github from the cli tool
 - [ ] make it easy to build an application from the given templates
 
-### Workflow.py
+### Dev Workflow
 
 using the `workflow.py` file
 you can push code by running:
@@ -101,14 +101,9 @@ you can push code by running:
 ```bash
 python workflow.py p
 ```
-
 One of the main use cases of the workflow.py file could be to share files across different folders
 this is becasue if we update iiles which we may want to share across different projects, we could do it only in the jaguar foldr
 make sure that it works and then run the following command
-
-```bash
-
-```
 
 The format of the calls are:
 
