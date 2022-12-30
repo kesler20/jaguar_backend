@@ -10,12 +10,10 @@ class AmplifyApplication:
     def __init__(self) -> None:
         self.categories = ["notifications", 'api', 'auth', 'custom', 'storage',
                            'analytics', 'function', 'geo', 'hosting', 'interactions', 'predictions', 'xr']
-
-        self.initial_args = len(["workflow.py", "aws", "function_signature"])
         self.workflow_ui = WorkflowRepresentation()
         self.osi = OperatingSystemInterface()
 
-    def update_amplify_application(self, *categoryIDs: Tuple[str]) -> None:
+    def update_amplify_application(self, categoryIDs: List[str]) -> None:
         '''modify_amplify_application will;
         1. remove each category selected through the category ids
         2. add each category selected through the category ids
@@ -26,13 +24,18 @@ class AmplifyApplication:
         ---
         Params:
         - categoryIDs : list or strings, this will be turned into a list of integers and used to access the desired
-        category from the categories list
+        category from the categories lis
+        the arguments to the function can be of the following form
+        ``["workflow.py", "aws", <categoryID...>]``
+        therefore to get the categoryID you can get everything from the 3rd element
+
+        the categoryIDs can be passed as integers  
 
         ---
         Returns: 
         - None
         '''
-        categoryIDs = categoryIDs[0]
+        categoryIDs = categoryIDs[2:]
         os.system(
             "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
         os.system(
@@ -54,7 +57,7 @@ class AmplifyApplication:
             self.workflow_ui.pp(f"pull locally ⤵️")
             os.system("amplify pull")
 
-    def modify_amplify_application(self, *categoryIDs: Tuple[str]) -> None:
+    def modify_amplify_application(self, categoryIDs: List[str]) -> None:
         '''modify_amplify_application will;
         1. add each category selected through the category ids
         2. check the amplify status between each addition
@@ -66,11 +69,17 @@ class AmplifyApplication:
         - categoryIDs : list or strings, this will be turned into a list of integers and used to access the desired
         category from the categories list
 
+        the arguments to the function can be of the following form
+        ``["workflow.py", "aws", <categoryID...>]``
+        therefore to get the categoryID you can get everything from the 3rd element
+
+        the categoryIDs can be passed as integers  
+
         ---
         Returns: 
         - None
         '''
-        categoryIDs = categoryIDs[0]
+        categoryIDs = categoryIDs[2:]
         os.system(
             "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
         os.system(
@@ -89,8 +98,8 @@ class AmplifyApplication:
             self.workflow_ui.pp(f"pull locally ⤵️")
             os.system("amplify pull")
 
-    def initialize_amplify_application(self, *categoryIDs: Tuple[str]) -> None:
-        categoryIDs = categoryIDs[0]
+    def initialize_amplify_application(self, categoryIDs: List[str]) -> None:
+        categoryIDs = categoryIDs[2:]
         os.system(
             "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
         os.system(
@@ -111,7 +120,7 @@ class AmplifyApplication:
             self.workflow_ui.pp(f"pull locally ⤵️")
             os.system("amplify pull")
 
-    def push_to_amplify(self, *args) -> None:
+    def push_to_amplify(self) -> None:
         '''
         In order to publish to amplify make sure that you have initialised the correct application
         and that the self.repository is bering configure

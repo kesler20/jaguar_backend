@@ -27,6 +27,10 @@ class GithubRepository:
         ```
         ---
         Parameters:
+        args 
+            is of the following type 
+        ``["filename", "git", "t", "py", "commit_message","target_directory"]``
+
         - _type - str : this can be py or js and it dictates what types of tests are run 
         - target_directory - str : this is the directory which the os will cd into
 
@@ -34,7 +38,6 @@ class GithubRepository:
         Returns:
         - None
         '''
-        # arg is of the following typ ["filename", "git", "t", "py", "commit_message","target_directory"]
         _type = "py"
         commit_message = "c make it better (untested)"
         target_directory = os.getcwd()
@@ -81,8 +84,9 @@ class GithubRepository:
 
     def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
+        
+        arg is of the following type ``["filename", "commit_message", "target_directory"]`` 
         """
-        # arg is of the following type ["filename", "commit_message", "target_directory"] 
         commit_message = "c make it better (untested)"
         target_directory = os.getcwd()
         if len(args) > 1:
@@ -103,8 +107,9 @@ class GithubRepository:
 
     def push_new_repo_to_github(self, args: List[str]) -> None:
         """push_new_repo_to_github has the following params
+        
+        arg is of the following type ``["filename", "git", "init", "target_directory"]`` 
         """
-        # arg is of the following type ["filename", "git", "init", "target_directory"] 
         target_directory = os.getcwd()
         if len(args) >= 4:
             target_directory = args[3]
@@ -122,8 +127,9 @@ class GithubRepository:
 
     def push_new_branch_to_github(self, args: List[str]) -> None:
         """push_new_branch_to_github has the following params
+
+        arg is of the following type ``["filename", "git", "-b", "target_directory"]`` 
         """
-        # arg is of the following type ["filename", "git", "-b", "target_directory"] 
         target_directory = os.getcwd()
         if len(args) >= 4:
             target_directory = args[3]
