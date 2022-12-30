@@ -115,7 +115,7 @@ if __name__ == "__main__":
         else:
             git.push_to_github(sys.argv)
     else:
-        with open("commands.txt", "r") as f:
+        with open(os.path.join(osi.gcu(),"Protocol","jaguar","commands.txt"), "r") as f:
             for line in f.readlines():
                 print(line)
 
