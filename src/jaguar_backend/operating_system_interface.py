@@ -1,10 +1,8 @@
 
 from typing import List, Any, Union, Dict, Optional, Tuple
-from dataclasses import dataclass
 import os
 import shutil
 
-@dataclass
 class OperatingSystemInterface:
     """OperatingSystemInterface is a class
     you can access the interface like a resource manager such as
@@ -38,7 +36,7 @@ class OperatingSystemInterface:
         return os.path.abspath(__file__).split(r"\protocol")[0]     
                   
     
-    def copy_file_from_folder(self, file : str, source_folder: str ="jaguar") -> None:
+    def copy_file_from_folder(self, file : str, source_folder: Optional[str] ="jaguar") -> None:
         """The folder that you are currently working on will be used as destination file
         The source folder will be searched in the protocol folder and is jaguar by default
         the file which will be replace in the local directory has path 
@@ -47,8 +45,10 @@ class OperatingSystemInterface:
         Parameters
         ---
             
-        file source_folder="jaguar"
-            to be passed as parameter 2
+        file str
+            the file that we want to move to the root directory from the source_folder
+        source_folder : str
+            the folder where the file will be searched, this is jaguar by default
         
         Returns
         ---
@@ -68,7 +68,7 @@ class OperatingSystemInterface:
         shutil.copy(source, destination)
                           
     
-    def move_folder_resources(self, destination_path : str) -> None:
+    def move_folder_resources(self,source_path: str, destination_path : str) -> None:
         """move_folder_resources 
         the directory passed as a property will be used as a source path
         
@@ -76,15 +76,17 @@ class OperatingSystemInterface:
         ---
             
         destination_path str
-            to be passed as parameter 2
+            this is the folder where the files will be moved to
+        source_path str
+            this is the folder where the files will be moved from
         
         Returns
         ---
         result: None
         """
-        for resource in os.listdir(self.directory):
+        for resource in os.listdir(source_path):
             destination_dir = os.path.join(destination_path, resource)
-            source_dir = os.path.join(self.directory, resource)
+            source_dir = os.path.join(source_path, resource)
             os.rename(source_dir, destination_dir)
                           
     
@@ -95,17 +97,26 @@ class OperatingSystemInterface:
         ---
             
         word str
-            to be passed as parameter 2
+            The word that will be searched on the current directory
         
+        Example
+        ---
+
+        for example this function can be used by moving the Os interface to the desired 
+        directory to search
+        ```python
+        with OperatingSystemInterface(desired_directory) as osi:
+            list_of_files = osi.read_word_in_directory("<class_name>")
+        print(list_of_files)
+        ```
         Returns
         ---
         result: 'list[str]'
         """
         result = []
-        for root, directories, file in os.walk(self.directory):
-            for file in file:
-                print(file)
-                with open(file) as f:
+        for root, directories, files in os.walk(self.directory):
+            for file in files:
+                with open(os.path.join(self.directory,file)) as f:
                     content = f.read()
                     if content.find(word) != -1:
                         result.append(file)

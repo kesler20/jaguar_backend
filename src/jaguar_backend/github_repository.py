@@ -3,7 +3,7 @@ from typing import List, Any, Union, Dict, Optional, Tuple
 from dataclasses import dataclass
 from jaguar_backend._types import *
 from jaguar_backend._base import WorkflowRepresentation
-
+from random import randint
 
 @dataclass
 class GithubRepository:
@@ -11,7 +11,7 @@ class GithubRepository:
 
     workflow_ui = WorkflowRepresentation()
 
-    def test_and_push_to_github(self, *args: Tuple[Any]) -> None:
+    def test_and_push_to_github(self, args: List[str]) -> None:
         '''test_and_push_to_github will:
         1. cd into target_directory
         2. git pull the latest changes from github
@@ -26,7 +26,7 @@ class GithubRepository:
         python workflow.py "git" "t" "py" "t commit message for changing test code"
         ```
         ---
-        Params:
+        Parameters:
         - _type - str : this can be py or js and it dictates what types of tests are run 
         - target_directory - str : this is the directory which the os will cd into
 
@@ -34,20 +34,21 @@ class GithubRepository:
         Returns:
         - None
         '''
+        # arg is of the following typ ["filename", "git", "t", "py", "commit_message","target_directory"]
         _type = "py"
         commit_message = "c make it better (untested)"
         target_directory = os.getcwd()
-        if len(args) == 0:
+        if len(args) == 3:
             pass
-        elif len(args) == 1:
-            _type = args[0]
-        elif len(args) == 2:
-            _type = args[0]
-            commit_message = args[1]
+        elif len(args) == 4:
+            _type = args[3]
+        elif len(args) == 5:
+            _type = args[3]
+            commit_message = args[4]
         else:
-            _type = args[0]
-            commit_message = args[1]
-            target_directory = args[2]
+            _type = args[3]
+            commit_message = args[4]
+            target_directory = args[5]
 
         self.workflow_ui.pp(f"cd into --> {target_directory} 🚕")
         os.chdir(target_directory)
@@ -78,12 +79,13 @@ class GithubRepository:
         else:
             self.workflow_ui.pp("workflow completed without pushing ❌")
 
-    def push_to_github(self, *args: Tuple[Any]) -> None:
+    def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
         """
+        # arg is of the following type ["filename", "commit_message"] 
         commit_message = "c make it better (untested)"
-        if len(args[0][0]) > 1:
-            commit_message = args[0][0]
+        if len(args) > 1:
+            commit_message = args[1]
         target_directory = os.getcwd()
 
         self.workflow_ui.pp("pushing untested code 😞")
@@ -95,14 +97,13 @@ class GithubRepository:
             f'git commit -m "{self.__style_commit_message(commit_message)}"')
         os.system("git push ")
 
-    def push_new_repo_to_github(self, *args) -> None:
+    def push_new_repo_to_github(self, args: List[str]) -> None:
         """push_new_repo_to_github has the following params
         """
-        args = args[0]
+        # arg is of the following type ["filename", "git", "init", "target_directory"] 
         target_directory = os.getcwd()
-
-        if len(args) == 1:
-            self.push_new_branch_to_github(target_directory)
+        if len(args) >= 4:
+            target_directory = args[3]
 
         self.workflow_ui.pp("making a new folder 📁")
         os.system(f"mkdir {target_directory}")
@@ -115,9 +116,14 @@ class GithubRepository:
         self.workflow_ui.pp("now you can publish the branch from VS Code")
         os.system(f"start code {target_directory}")
 
-    def push_new_branch_to_github(self, target_directory: str) -> None:
+    def push_new_branch_to_github(self, args: List[str]) -> None:
         """push_new_branch_to_github has the following params
         """
+        # arg is of the following type ["filename", "git", "-b", "target_directory"] 
+        target_directory = os.getcwd()
+        if len(args) >= 4:
+            target_directory = args[3]
+            
         os.chdir(target_directory)
         self.workflow_ui.pp("making a new branch 🌳")
         os.system("git checkout -b new-feature")

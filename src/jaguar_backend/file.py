@@ -2,12 +2,9 @@
 from typing import List, Any, Union, Dict, Optional, Tuple
 import json
 import os
-from jaguar_backend._types import Path
+from pathlib import Path
 
 class File:
-    """File is a class"""
-    
-    filename : Path
     
     def __init__(self, filename : Path) -> None:
         """The class has the following properties
