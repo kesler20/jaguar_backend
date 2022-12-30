@@ -2,7 +2,8 @@ import sys
 try:
     from src.jaguar_backend.github_repository import GithubRepository
 except ModuleNotFoundError:
-    from github_repository import GithubRepository
+    # from github_repository import GithubRepository
+    pass
 
 print("Testing:" + GithubRepository.__doc__)
 

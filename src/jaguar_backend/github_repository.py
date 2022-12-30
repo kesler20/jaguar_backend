@@ -82,11 +82,15 @@ class GithubRepository:
     def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
         """
-        # arg is of the following type ["filename", "commit_message"] 
+        # arg is of the following type ["filename", "commit_message", "target_directory"] 
         commit_message = "c make it better (untested)"
+        target_directory = os.getcwd()
         if len(args) > 1:
             commit_message = args[1]
-        target_directory = os.getcwd()
+        elif len(args) > 2:
+            target_directory = args[2]
+        else:
+            pass
 
         self.workflow_ui.pp("pushing untested code 😞")
         self.workflow_ui.pp(f"cd into --> {target_directory} 🚕")
@@ -123,7 +127,7 @@ class GithubRepository:
         target_directory = os.getcwd()
         if len(args) >= 4:
             target_directory = args[3]
-            
+
         os.chdir(target_directory)
         self.workflow_ui.pp("making a new branch 🌳")
         os.system("git checkout -b new-feature")
