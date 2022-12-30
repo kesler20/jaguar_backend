@@ -1,5 +1,4 @@
-
-from typing import List, Any, Union, Dict, Optional, Tuple
+from typing import List, Any, Union, Dict, Optional, Tuple, Callable, Collection
 import json
 import os
 from pathlib import Path
@@ -44,8 +43,8 @@ class File:
         result: None
         """
         with open(self.filename, "a") as file:
-            file.write(content)
-                          
+            file.write(content + "\n")
+                        
     
     def write(self, content : str) -> None:
         """write has the following params
@@ -115,7 +114,7 @@ class File:
             file.write(f"{content}\n")
                           
     
-    def read_line_by_condition(self, condition: str ) -> 'list[str]':
+    def read_line_by_condition(self, condition: Callable[[Any], Collection[Any]]) -> List[str]:
         """read_line_by_condition has the following params
         
         Parameters
@@ -129,8 +128,8 @@ class File:
         ---
         Result : list[str]
         """
-        with open(self.filename, "w") as file:
-            content = file.readlines()
+        with open(self.filename, "r") as file:
+            content: List[str] = file.readlines()
 
         return list(filter(condition, content))       
     

@@ -11,7 +11,7 @@ classDiagram
    OperatingSystemInterface : + __enter__() os
    OperatingSystemInterface : + __exit__() os
    OperatingSystemInterface : + gcu() str
-   OperatingSystemInterface : + copy_file_from_folder() 
+   OperatingSystemInterface : + copy_file_from_folder()
    OperatingSystemInterface : + move_folder_resources() None
    OperatingSystemInterface : + read_word_in_directory() list
 
@@ -20,20 +20,20 @@ classDiagram
    GithubRepository : + test_and_push_to_github() None
    GithubRepository : + push_to_github() None
    GithubRepository : + push_new_repo_to_github() None
-   GithubRepository : + push_new_branch_to_github() 
+   GithubRepository : + push_new_branch_to_github()
    GithubRepository : + style_commit_message() str
 
    ReactApplication <|-- object
    ReactApplication : + __init__() None
-   ReactApplication : + initialise_env_file() 
+   ReactApplication : + initialise_env_file()
    ReactApplication : + initialise_npm_process() None
 
    AmplifyApplication <|-- object
    AmplifyApplication : + __init__() None
-   AmplifyApplication : + update_amplify_application() 
-   AmplifyApplication : + modify_amplify_application() 
-   AmplifyApplication : + initialize_amplify_application() 
-   AmplifyApplication : + push_to_amplify() 
+   AmplifyApplication : + update_amplify_application()
+   AmplifyApplication : + modify_amplify_application()
+   AmplifyApplication : + initialize_amplify_application()
+   AmplifyApplication : + push_to_amplify()
 
    File <|-- object
    File : + filename Path
@@ -50,6 +50,7 @@ classDiagram
 ```
 
 Improve developer experience through jaguar
+
 - [ ] Make it work on any OS out of the box
 - [ ] Change the name of the workflow.py to dev.py and include the operatingSystemInterface and the File object in it
 - [ ] Test your code
@@ -61,32 +62,40 @@ Improve developer experience through jaguar
 - [ ] Set up a typescript project
 - [ ] Turn all the js files to ts files
 - [ ] Generate the gitignore, looking at the file extention or the file name
-- [ ] Include various github controls command such as branching 
+- [ ] Include various github controls command such as branching
 
 To setup github cli on a linux machine
+
 ```linux
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) 
-signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee 
+echo "deb [arch=$(dpkg --print-architecture)
+signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee
 /etc/apt/sources.list.d/github-cli.list > /dev/null
 ```
+
 ```linux
 sudo apt update
 ```
+
 ```linux
 sudo apt install gh
 ```
+
 ```linux
 gh auth login
 ```
+
 after completing the autorization process
-To change the description of the repository 
+To change the description of the repository
+
 ```linux
 gh repo edit https://github.com/kesler20/betting_bot , --description "a script to automatically place bets and analyse them"
 ```
+
 ### A list of potential improvements
+
 - [ ] Create issues automatically on the repo from the cli
-- [ ] Resolve those issues 
+- [ ] Resolve those issues
 - [ ] Read those issues and you can print them nicely on the cli
 - [ ] Merge a new-feature branch onto the main and delete the new feature branch automatically when all the tests are passed
 - [ ] Allow the user to call the help function from their repo, this can be implemented by either using the get requests in python and exposing the service of the cli using fastapi other things like files can also be accessed like this
@@ -101,6 +110,7 @@ you can push code by running:
 ```bash
 python workflow.py p
 ```
+
 One of the main use cases of the workflow.py file could be to share files across different folders
 this is becasue if we update iiles which we may want to share across different projects, we could do it only in the jaguar foldr
 make sure that it works and then run the following command
