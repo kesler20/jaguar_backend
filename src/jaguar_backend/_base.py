@@ -4,9 +4,6 @@ import time
 
 class WorkflowRepresentation:
 
-    def __init__(self) -> None:
-        pass
-
     def pp(self, print_message: str):
         print(f"------------- {print_message}")
         time.sleep(1)

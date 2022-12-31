@@ -63,6 +63,7 @@ Improve developer experience through jaguar
 - [ ] Generate the gitignore, looking at the file extention or the file name
 - [ ] Include various github controls command such as branching
 - [ ] create a function to turn this to-do list into issues
+- [ ] allow for crud operations on github issues
 
 To setup github cli on a linux machine
 
