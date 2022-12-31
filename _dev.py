@@ -71,24 +71,19 @@ if __name__ == "__main__":
                     'running python workflow.py "react" "init" will initialize the react application')
 
         elif sys.argv[1] == "push":
-            for dir in os.listdir(r"C:\Users\CBE-User 05\protocol"):
-                with OperatingSystemInterface(os.path.join(r"C:\Users\CBE-User 05\protocol", dir)) as op_sys:
-                    op_sys.system("python workflow.py g")
+            for dir in os.listdir(os.path.join(osi.gcu(),"protocol")):
+                with OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir)) as op_sys:
+                    op_sys.system("python _dev.py g")
 
         elif sys.argv[1] == "install":
             workflow_ui.pp("INSTALLING JAGUAR <😼⏬>")
             # now you can push all of the changes to github within the protocol folder as follows
-            for dir in os.listdir(r"C:\Users\CBE-User 05\protocol"):
+            for dir in os.listdir(os.path.join(osi.gcu(),"protocol")):
                 if dir == "jaguar":
                     pass
                 else:
-                    with OperatingSystemInterface(os.path.join(r"C:\Users\CBE-User 05\protocol", dir)) as op_sys:
-                        # simulate that you are in the sofia silent folder
-                        op_sys.system("mkdir interfaces")
-                    osi = OperatingSystemInterface(
-                        os.path.join(r"C:\Users\CBE-User 05\protocol", dir))
-                    osi.copy_file_from_folder(r"interfaces\os_interface.py")
-                    osi.copy_file_from_folder("workflow.py")
+                    osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
+                    osi.copy_file_from_folder("_dev.py")
 
         elif sys.argv[1] == "-h":
             with open("commands.txt", "r") as f:
@@ -97,7 +92,7 @@ if __name__ == "__main__":
 
         elif sys.argv[1] == "copy":
             folders = []
-            files = []
+            files: List[str] = []
             for arg in sys.argv[2:]:
                 if arg.startswith("f "):
                     files.append(arg)
@@ -112,8 +107,11 @@ if __name__ == "__main__":
                         osi = OperatingSystemInterface(
                             os.path.join(r"C:\Users\CBE-User 05\protocol", dir))
                         osi.copy_file_from_folder(r"{}".format(file))
+                        
         else:
+            # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
+
     else:
         with open(os.path.join(osi.gcu(),"Protocol","jaguar","commands.txt"), "r") as f:
             for line in f.readlines():
