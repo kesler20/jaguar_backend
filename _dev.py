@@ -46,13 +46,13 @@ if __name__ == "__main__":
         
         elif sys.argv[1] == "aws":
             if sys.argv[2] == "init":
-                amplify.initialize_amplify_application(sys.argv[2:])
+                amplify.initialize_amplify_application(sys.argv)
             elif sys.argv[2] == "edit":
-                amplify.modify_amplify_application(sys.argv[2:])
+                amplify.modify_amplify_application(sys.argv)
             elif sys.argv[2] == "u":
-                amplify.update_amplify_application(sys.argv[2:])
+                amplify.update_amplify_application(sys.argv)
             elif sys.argv[2] == "publish":
-                amplify.push_to_amplify(sys.argv[2:])
+                amplify.push_to_amplify(sys.argv)
             else:
                 workflow_ui.describe("aws")
                 print("these are the categories that you can select")
@@ -61,9 +61,9 @@ if __name__ == "__main__":
 
         elif sys.argv[1] == "react":
             if sys.argv[2] == "init":
-                react.initialise_npm_process(*sys.argv[2:])
+                react.initialise_npm_process(sys.argv)
             elif sys.argv[2] == "config":
-                react.initialise_env_file(*sys.argv[2:])
+                react.initialise_env_file(sys.argv)
             else:
                 print(
                     'running python workflow.py "react" "config" will paste the .env file in the root dir')
@@ -79,35 +79,17 @@ if __name__ == "__main__":
             workflow_ui.pp("INSTALLING JAGUAR <😼⏬>")
             # now you can push all of the changes to github within the protocol folder as follows
             for dir in os.listdir(os.path.join(osi.gcu(),"protocol")):
-                if dir == "jaguar":
+                if dir == "jaguar_backend":
                     pass
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
                     osi.copy_file_from_folder("_dev.py")
 
         elif sys.argv[1] == "-h":
-            with open("commands.txt", "r") as f:
+            with open(os.path.join(osi.gcu(),"protocol","jaguar","commands.txt"), "r") as f:
                 for line in f.readlines():
                     print(line)
 
-        elif sys.argv[1] == "copy":
-            folders = []
-            files: List[str] = []
-            for arg in sys.argv[2:]:
-                if arg.startswith("f "):
-                    files.append(arg)
-                else:
-                    folders.append(arg)
-            files = [file.replace("f ", "") for file in files]
-            for dir in folders:
-                if dir == "jaguar":
-                    pass
-                else:
-                    for file in files:
-                        osi = OperatingSystemInterface(
-                            os.path.join(r"C:\Users\CBE-User 05\protocol", dir))
-                        osi.copy_file_from_folder(r"{}".format(file))
-                        
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)

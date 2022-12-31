@@ -36,7 +36,7 @@ class OperatingSystemInterface:
         return os.path.abspath(__file__).split(r"\protocol")[0]     
                   
     
-    def copy_file_from_folder(self, file : str, source_folder: Optional[str] ="jaguar") -> None:
+    def copy_file_from_folder(self, file : str, source_folder: Optional[str] ="jaguar_backend") -> None:
         """The folder that you are currently working on will be used as destination file
         The source folder will be searched in the protocol folder and is jaguar by default
         the file which will be replace in the local directory has path 
