@@ -80,8 +80,10 @@ class GithubRepository:
             os.system(
                 f'git commit -m "{self.__style_commit_message(commit_message)}"')
             os.system("git push ")
+            os.system("echo https://github.com/kesler20?tab=repositories") 
         else:
             self.workflow_ui.pp("workflow completed without pushing ❌")
+            os.system("echo https://github.com/kesler20?tab=repositories") 
 
     def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
@@ -105,6 +107,7 @@ class GithubRepository:
         os.system(
             f'git commit -m "{self.__style_commit_message(commit_message)}"')
         os.system("git push ")
+        os.system("echo https://github.com/kesler20?tab=repositories") 
 
     def push_new_repo_to_github(self, args: List[str]) -> None:
         """push_new_repo_to_github has the following params
@@ -143,6 +146,7 @@ class GithubRepository:
             f'git commit -m "{self.__style_commit_message("c add new feature")}"')
         self.workflow_ui.pp("publishing the new branch to github ⌚")
         os.system(f"git push --set-upstream origin new-feature")
+        os.system("echo https://github.com/kesler20?tab=repositories") 
 
     def __style_commit_message(self, commit_message: str) -> str:
         """style_commit_message has the following params
