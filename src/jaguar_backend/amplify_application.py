@@ -37,9 +37,7 @@ class AmplifyApplication:
         '''
         categoryIDs = categoryIDs[2:]
         os.system(
-            "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
-        os.system(
-            r'start excel "{}\onedrive\documents\amplify-55X8f_accessKeys"'.format(self.osi.gcu()))
+            "start https://onedrive.live.com/Edit.aspx?resid=D6E96D5E52A0D29C!735180&wd=cpe")
         for categoryID in categoryIDs:
             category = self.categories[int(categoryID)]
             self.workflow_ui.pp(
@@ -81,9 +79,7 @@ class AmplifyApplication:
         '''
         categoryIDs = categoryIDs[2:]
         os.system(
-            "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
-        os.system(
-            r'start excel "{}\onedrive\documents\amplify-55X8f_accessKeys"'.format(self.osi.gcu()))
+            "start https://onedrive.live.com/Edit.aspx?resid=D6E96D5E52A0D29C!735180&wd=cpe")
         for categoryID in categoryIDs:
             category = self.categories[int(categoryID)]
             self.workflow_ui.pp(
@@ -101,9 +97,7 @@ class AmplifyApplication:
     def initialize_amplify_application(self, categoryIDs: List[str]) -> None:
         categoryIDs = categoryIDs[2:]
         os.system(
-            "start https://docs.google.com/spreadsheets/d/1bVORUU7gE_fYZW1FjpHu0Y-peRuyXPBO-o7_NsMurnI/edit#gid=1067183673")
-        os.system(
-            r'start excel "{}\onedrive\documents\amplify-55X8f_accessKeys"'.format(self.osi.gcu()))
+            "start https://onedrive.live.com/Edit.aspx?resid=D6E96D5E52A0D29C!735180&wd=cpe")
         self.workflow_ui.pp("initialize a new amplify application 👶")
         os.system("amplify init")
         for categoryID in categoryIDs:
