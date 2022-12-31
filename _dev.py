@@ -38,7 +38,7 @@ if __name__ == "__main__":
                     git.push_new_branch_to_github(sys.argv)
             else:
                 print("try to run one of the following")
-                print("python _dev.py git t py  -> to run the tests ")
+                print("python _dev.py git t py -> to run the tests ")
                 print("python _dev.py git init <target_directory> -> to initialize a repo ")
                 print("python _dev.py git <any> <target_directory> -> to initialize a new branch ")
         
