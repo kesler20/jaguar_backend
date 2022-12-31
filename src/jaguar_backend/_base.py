@@ -38,7 +38,7 @@ class WorkflowRepresentation:
                     manual_test_folder = os.path.join(
                         __file__.split("protocol")[0],
                         "protocol",
-                        args[3],
+                        args[4],
                         "tests"
                     )
 
