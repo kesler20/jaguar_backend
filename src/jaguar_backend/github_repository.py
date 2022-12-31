@@ -5,6 +5,7 @@ from jaguar_backend._types import *
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
+
 @dataclass
 class GithubRepository:
     """GithubRepository is a class"""
@@ -84,13 +85,13 @@ class GithubRepository:
 
     def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
-        
+
         arg is of the following type ``["filename", "commit_message", "target_directory"]`` 
         """
         commit_message = "c make it better (untested)"
         target_directory = os.getcwd()
         if len(args) > 1:
-            commit_message = args[1]
+            commit_message = args[1] if len(args[1]) > 1 else commit_message
         elif len(args) > 2:
             target_directory = args[2]
         else:
@@ -107,7 +108,7 @@ class GithubRepository:
 
     def push_new_repo_to_github(self, args: List[str]) -> None:
         """push_new_repo_to_github has the following params
-        
+
         arg is of the following type ``["filename", "git", "init", "target_directory"]`` 
         """
         target_directory = os.getcwd()
