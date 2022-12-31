@@ -52,7 +52,7 @@ classDiagram
 Improve developer experience through jaguar
 
 - [ ] Make it work on any OS out of the box
-- [ ] Change the name of the workflow.py to dev.py and include the operatingSystemInterface and the File object in it
+- [ ] Change the name of the _dev.py to dev.py and include the operatingSystemInterface and the File object in it
 - [ ] Test your code
 - [ ] getting a config file, this can be fetched from the web
 - [ ] building a virtual environment automatically and installing all the dependencies
@@ -104,21 +104,21 @@ gh repo edit https://github.com/kesler20/betting_bot , --description "a script t
 
 ### Dev Workflow
 
-using the `workflow.py` file
+using the `_dev.py` file
 you can push code by running:
 
 ```bash
-python workflow.py p
+python _dev.py p
 ```
 
-One of the main use cases of the workflow.py file could be to share files across different folders
+One of the main use cases of the _dev.py file could be to share files across different folders
 this is becasue if we update iiles which we may want to share across different projects, we could do it only in the jaguar foldr
 make sure that it works and then run the following command
 
 The format of the calls are:
 
 ```bash
-python workflow.py class_name function_name "argument1" "argument2"
+python _dev.py class_name function_name "argument1" "argument2"
 ```
 
 The last argument is usually the directoy, if you write \* this will apply a function to all directories or also if you leave it black
@@ -131,27 +131,27 @@ this will use the current working directory
 
 > If you do not enter the arguments to the function, the argument that will be passed is None by default
 
-to start using the `workflow.py` use
+to start using the `_dev.py` use
 
 ```bash
-python workflow.py "install"
+python _dev.py "install"
 ```
 
-this will copy the current jaguar `os_interface.py` file and the `workflow.py` file in all the repositories in the root protocol folder.
+this will copy the current jaguar `os_interface.py` file and the `_dev.py` file in all the repositories in the root protocol folder.
 
 the following table summarizes various commands
 | command | Description | Options |
 | --- | --- | --- |
-| `python workflow.py p ` | push untested code to github with a default message of code: make it better | None |
-| `python workflow.py "d changed documentation"` | push code using a custom message | use `"c code change message"/"d document change message"/"t test change message"` |  
-| `python workflow.py "push"` | this will run "python workflow.py g" on all the directories in the protocol folder | None |
-| `python workflow.py "sync"` | this command will syncronize files from jaguar | standard command `python workflow.py "f interfaces\os_interface.py" "protocol_backend"` anything starting with "f " is considered a file and if the folders preceeding it do not exist this will be created in the repositories given (args withoput the leading "f ")|
-| `python workflow.py "git"` | push code to github from a target dir | `p g "target_directory"` to push a new github repo `python workflow.py "git" "init"` to push a new branch `python workflow.py "git" "init" "branch"` |
-| `python workflow.py "git" t "py" "t commit message for changing test code"` | runs python tests and pushes to github after asking for permission | py/js for what tests to run - "t "/"c "/"d " for test, code, and document commit messages respectively |
-| `python workflow.py aws "init" 1` | initialise an amplify application with notifications category | 1,2,3,4, -> 11 run `python workflow.py "aws" d` to check category ids |
-| `python workflow.py aws "edit" 1` | add categories to an existing amplify app | you could also run `python workflow.py "aws" u 1` to remove and add categories for updates |
-| `python workflow.py aws "sync" 1` | synchronize .env file with the aws-exports file | None |
-| `python workflow.py aws "publish"` | run jest tests, format code, push to github, publish to amplify | None |
-| `python workflow.py "aws" d` | describe the categories and best practices | None |
-| `python workflow.py "react" "init"` | clone a react project, pull the latest changes, run npm i, run npm start | `python workflow.py "react" "init" "project_name"` |
-| `python workflow.py "react" "config"` | create a .env file in the root dir | None |
+| `python _dev.py p ` | push untested code to github with a default message of code: make it better | None |
+| `python _dev.py "d changed documentation"` | push code using a custom message | use `"c code change message"/"d document change message"/"t test change message"` |  
+| `python _dev.py "push"` | this will run "python _dev.py g" on all the directories in the protocol folder | None |
+| `python _dev.py "sync"` | this command will syncronize files from jaguar | standard command `python _dev.py "f interfaces\os_interface.py" "protocol_backend"` anything starting with "f " is considered a file and if the folders preceeding it do not exist this will be created in the repositories given (args withoput the leading "f ")|
+| `python _dev.py "git"` | push code to github from a target dir | `p g "target_directory"` to push a new github repo `python _dev.py "git" "init"` to push a new branch `python _dev.py "git" "init" "branch"` |
+| `python _dev.py "git" t "py" "t commit message for changing test code"` | runs python tests and pushes to github after asking for permission | py/js for what tests to run - "t "/"c "/"d " for test, code, and document commit messages respectively |
+| `python _dev.py aws "init" 1` | initialise an amplify application with notifications category | 1,2,3,4, -> 11 run `python _dev.py "aws" d` to check category ids |
+| `python _dev.py aws "edit" 1` | add categories to an existing amplify app | you could also run `python _dev.py "aws" u 1` to remove and add categories for updates |
+| `python _dev.py aws "sync" 1` | synchronize .env file with the aws-exports file | None |
+| `python _dev.py aws "publish"` | run jest tests, format code, push to github, publish to amplify | None |
+| `python _dev.py "aws" d` | describe the categories and best practices | None |
+| `python _dev.py "react" "init"` | clone a react project, pull the latest changes, run npm i, run npm start | `python _dev.py "react" "init" "project_name"` |
+| `python _dev.py "react" "config"` | create a .env file in the root dir | None |
