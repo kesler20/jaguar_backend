@@ -29,7 +29,19 @@ class WorkflowRepresentation:
         if _type == "py":
             if len(args) > 3:
                 self.pp("running manual tests in python 🐍 🧪 ⚙️")
-                manual_test_folder = os.path.join(__file__.split("jaguar_backend")[0],"jaguar_backend","tests")
+                manual_test_folder = os.path.join(
+                    __file__.split("jaguar_backend")[0],
+                    "jaguar_backend",
+                    "tests"
+                )
+                if len(args) > 4:
+                    manual_test_folder = os.path.join(
+                        __file__.split("protocol")[0],
+                        "protocol",
+                        args[3],
+                        "tests"
+                    )
+
                 test_passed = []
                 for test_file in os.listdir(manual_test_folder):
                     try:
