@@ -83,6 +83,9 @@ if __name__ == "__main__":
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
                     osi.copy_file_from_folder("_dev.py")
 
+        elif sys.argv[1] == "test":
+            workflow_ui.run_tests(sys.argv)
+            
         elif sys.argv[1] == "-h":
             with open(os.path.join(osi.gcu(),"protocol","jaguar","commands.txt"), "r") as f:
                 for line in f.readlines():

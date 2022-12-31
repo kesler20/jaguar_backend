@@ -1,3 +1,5 @@
+import os
+from typing import List
 import time
 
 class WorkflowRepresentation:
@@ -8,6 +10,45 @@ class WorkflowRepresentation:
     def pp(self, print_message: str):
         print(f"------------- {print_message}")
         time.sleep(1)
+    
+    def run_tests(self,args: List[str]):
+        """runs the tests found within the repository
+        
+        Parameters
+        ---
+        args : List[str]
+            the last parameter is whether you want to
+            run manual tests or not
+            ``["_dev.py","test","py","manual"]``
+        
+        Returns
+        ---
+        None
+        """
+        _type = args[2]
+        if _type == "py":
+            if len(args) > 3:
+                self.pp("running manual tests in python 🐍 🧪 ⚙️")
+                manual_test_folder = os.path.join(__file__.split("jaguar_backend")[0],"jaguar_backend","tests")
+                test_passed = []
+                for test_file in os.listdir(manual_test_folder):
+                    try:
+                        print(os.path.join(manual_test_folder,test_file))
+                        self.pp(f"running the following test {test_file}")
+                        os.system(f"python {os.path.join(manual_test_folder,test_file)}")
+                        self.pp(f"test passed at {test_file} ✅")
+                        test_passed.append(test_file)
+                        for test_file_passed in test_passed:
+                            print("passed the following tests ✅",test_file_passed)
+                    except:
+                        self.pp("ERROR found in:",test_file)
+                        self.pp(f"test passed at {test_file} ❌")
+            else:
+                self.pp("running automatic tests in python 🐍 🧪 🤖")
+                os.system("python pytest tests")
+        else:
+            self.pp("running javascript tests using npm ☕ 🧪")
+            os.system("npm tests")
 
     def describe(self, topic: str):
         if topic == "aws":
