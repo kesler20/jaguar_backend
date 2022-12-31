@@ -18,6 +18,18 @@ class WorkflowRepresentation:
             run manual tests or not
             ``["_dev.py","test","py","manual"]``
         
+        Example
+        ---
+        to run manual tests        
+        ```bash
+        python _dev.py "test" "py" "manual" "jaguar_backend"  
+        ```
+        
+        to run automatic tests
+        ```bash
+        python _dev.py "test" "py"
+        ```
+
         Returns
         ---
         None
