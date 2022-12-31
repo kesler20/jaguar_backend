@@ -52,7 +52,6 @@ classDiagram
 Improve developer experience through jaguar
 
 - [ ] Make it work on any OS out of the box
-- [ ] Change the name of the _dev.py to dev.py and include the operatingSystemInterface and the File object in it
 - [ ] Test your code
 - [ ] getting a config file, this can be fetched from the web
 - [ ] building a virtual environment automatically and installing all the dependencies
@@ -63,6 +62,7 @@ Improve developer experience through jaguar
 - [ ] Turn all the js files to ts files
 - [ ] Generate the gitignore, looking at the file extention or the file name
 - [ ] Include various github controls command such as branching
+- [ ] create a function to turn this to-do list into issues
 
 To setup github cli on a linux machine
 
@@ -111,7 +111,7 @@ you can push code by running:
 python _dev.py p
 ```
 
-One of the main use cases of the _dev.py file could be to share files across different folders
+One of the main use cases of the \_dev.py file could be to share files across different folders
 this is becasue if we update iiles which we may want to share across different projects, we could do it only in the jaguar foldr
 make sure that it works and then run the following command
 
@@ -144,7 +144,7 @@ the following table summarizes various commands
 | --- | --- | --- |
 | `python _dev.py p ` | push untested code to github with a default message of code: make it better | None |
 | `python _dev.py "d changed documentation"` | push code using a custom message | use `"c code change message"/"d document change message"/"t test change message"` |  
-| `python _dev.py "push"` | this will run "python _dev.py g" on all the directories in the protocol folder | None |
+| `python _dev.py "push"` | this will run "python \_dev.py g" on all the directories in the protocol folder | None |
 | `python _dev.py "sync"` | this command will syncronize files from jaguar | standard command `python _dev.py "f interfaces\os_interface.py" "protocol_backend"` anything starting with "f " is considered a file and if the folders preceeding it do not exist this will be created in the repositories given (args withoput the leading "f ")|
 | `python _dev.py "git"` | push code to github from a target dir | `p g "target_directory"` to push a new github repo `python _dev.py "git" "init"` to push a new branch `python _dev.py "git" "init" "branch"` |
 | `python _dev.py "git" t "py" "t commit message for changing test code"` | runs python tests and pushes to github after asking for permission | py/js for what tests to run - "t "/"c "/"d " for test, code, and document commit messages respectively |
