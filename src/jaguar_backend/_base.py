@@ -35,7 +35,6 @@ class WorkflowRepresentation:
                     "tests"
                 )
                 if len(args) > 4:
-                    print("this")
                     manual_test_folder = os.path.join(
                         __file__.split("protocol")[0],
                         "protocol",
