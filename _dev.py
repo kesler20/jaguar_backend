@@ -21,15 +21,13 @@ except ModuleNotFoundError:
 
 if __name__ == "__main__":
     osi = OperatingSystemInterface()
-    user_directory = osi.gcu()
-
     amplify = AmplifyApplication()
     react = ReactApplication()
     git = GithubRepository()
     workflow_ui = WorkflowRepresentation()
 
-
     if len(sys.argv) > 1:
+        
         if sys.argv[1] == "git":
             if len(sys.argv) > 2:
                 if sys.argv[2] == "t":
@@ -98,5 +96,3 @@ if __name__ == "__main__":
         with open(os.path.join(osi.gcu(),"Protocol","jaguar","commands.txt"), "r") as f:
             for line in f.readlines():
                 print(line)
-
-

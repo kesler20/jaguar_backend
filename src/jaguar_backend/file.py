@@ -20,15 +20,13 @@ class File:
         """
         self.filename = filename.as_posix()
                           
-    
     def read(self) -> str:
         """read has the following params
         """
         with open(self.filename, "r") as file:
             content = file.read()
         return content        
-                  
-    
+                     
     def append(self, content : str) -> None:
         """append has the following params
         
@@ -44,8 +42,7 @@ class File:
         """
         with open(self.filename, "a") as file:
             file.write(content + "\n")
-                        
-    
+                    
     def write(self, content : str) -> None:
         """write has the following params
         
@@ -61,16 +58,14 @@ class File:
         """
         with open(self.filename, "w") as file:
             file.write(content)
-                          
-    
+                        
     def readlines(self) -> 'list[str]':
         """readlines has the following params
         """
         with open(self.filename, "r") as file:
             content = file.readlines()
         return content        
-                  
-    
+                     
     def get_json(self) -> Any:
         """get_json has the following params
         """
@@ -78,7 +73,6 @@ class File:
             content = json.loads(json_file.read())
         return content       
                   
-    
     def write_json(self, content: Union[Dict[str, Any], List[Any]]) -> None:
         """write_json has the following params
         
@@ -94,9 +88,7 @@ class File:
         """
         with open(self.filename, "w") as json_file:
             json_file.write(json.dumps(content, indent=2))
-
-                          
-    
+                            
     def writeline(self, content : str) -> None:
         """writeline has the following params
         
@@ -113,7 +105,6 @@ class File:
         with open(self.filename, "w") as file:
             file.write(f"{content}\n")
                           
-    
     def read_line_by_condition(self, condition: Callable[[Any], Collection[Any]]) -> List[str]:
         """read_line_by_condition has the following params
         
