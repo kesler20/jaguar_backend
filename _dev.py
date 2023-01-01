@@ -88,7 +88,7 @@ if __name__ == "__main__":
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
                     osi.copy_file_from_folder("_dev.py")
-                    if index == len(os.listdir(os.path.join(osi.gcu(),"protocol"))):
+                    if index + 1 == len(os.listdir(os.path.join(osi.gcu(),"protocol"))):
                         workflow_ui.pp("you can now paste the src.jaguar_backend in directory 😇")
                         os.system("start code jaguar_backend")
 
