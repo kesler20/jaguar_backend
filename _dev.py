@@ -82,17 +82,15 @@ if __name__ == "__main__":
         elif sys.argv[1] == "install":
             workflow_ui.pp("INSTALLING JAGUAR <😼⏬>")
             # now you can push all of the changes to github within the protocol folder as follows
-            for dir in os.listdir(os.path.join(osi.gcu(),"protocol")):
+            for index, dir in enumerate(os.listdir(os.path.join(osi.gcu(),"protocol"))):
                 if dir == "jaguar_backend":
                     pass
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
-                    try:
-                        osi.copy_file_from_folder("_dev.py")
-                        osi.copy_file_from_folder(os.path.join("src","jaguar_backend"))
-                    except PermissionError as err:
-                        workflow_ui.pp(f"ERROR ❌ when installing at {dir}")
-                        print(err)
+                    osi.copy_file_from_folder("_dev.py")
+                    if index == len(os.listdir(os.path.join(osi.gcu(),"protocol"))):
+                        workflow_ui.pp("you can now paste the src.jaguar_backend in directory 😇")
+                        os.system("start code jaguar_backend")
 
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
