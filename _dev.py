@@ -114,31 +114,30 @@ if __name__ == "__main__":
                     pass
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir))
-                    osi.copy_file_from_folder("_dev.py")
-                    
+                    osi.copy_file_from_jaguar("_dev.py")
+
                     with OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir)) as op_sys:
                         try:
                             op_sys.system("rmdir /S /Q jaguar_backend")
                             op_sys.system("rmdir /S /Q src")
-                        except FileExistsError: 
+                        except FileExistsError:
                             pass
 
-                    osi.copy_folder_from_folder(os.path.join("src", "jaguar_backend"))
+                    osi.copy_folder_from_jaguar(os.path.join("src", "jaguar_backend"))
                     if index + 1 == len(os.listdir(os.path.join(osi.gcu(), "protocol"))):
                         workflow_ui.pp("Installation completed 😇")
 
-        
         elif sys.argv[1] == "copy":
             if sys.argv[2] == "file":
                 if len(sys.argv) > 5:
-                    osi.copy_file_from_folder(sys.argv[3],sys.argv[4])
+                    osi.copy_file(sys.argv[3], sys.argv[4])
                 else:
-                    osi.copy_file_from_folder(sys.argv[3])
+                    osi.copy_file(sys.argv[3])
             else:
                 if len(sys.argv) > 5:
-                    osi.copy_folder_from_folder(sys.argv[3],sys.argv[4])
+                    osi.copy_folder(sys.argv[3], sys.argv[4])
                 else:
-                    osi.copy_folder_from_folder(sys.argv[3])
+                    osi.copy_folder(sys.argv[3])
 
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)

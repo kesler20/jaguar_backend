@@ -43,7 +43,7 @@ class OperatingSystemInterface:
         '''Get the current user i.e. C:/Users/CBE-User 05'''
         return os.path.abspath(__file__).split(r"\protocol")[0]
 
-    def copy_file_from_folder(self, file: str, source_folder: Optional[str] = "jaguar_backend") -> None:
+    def copy_file_from_jaguar(self, file: str, source_folder: Optional[str] = "jaguar_backend") -> None:
         """The folder that you are currently working on will be used as destination file
         The source folder will be searched in the protocol folder and is jaguar_backend by default
         the file which will be replace in the local directory has path 
@@ -74,7 +74,7 @@ class OperatingSystemInterface:
         print(os.getcwd())
         shutil.copy(source, destination)
 
-    def copy_folder_from_folder(self, folder: str, source_folder: Optional[str] = os.path.join("protocol", "jaguar_backend")) -> None:
+    def copy_folder_from_jaguar(self, folder: str, source_folder: Optional[str] = os.path.join("protocol", "jaguar_backend")) -> None:
         """The folder that you are currently working on will be used as destination folder
         The source folder will be searched in the protocol folder and is protocol by default
         the folder which will be replace in the local directory has path 
@@ -111,6 +111,45 @@ class OperatingSystemInterface:
             shutil.rmtree(destination)
             shutil.copytree(source, destination)
 
+    def copy_folder(self, source_folder: str, destination_folder: str = None) -> None:
+        """copy_folder
+
+        copy the folders found in the given paths
+        the folder will be searched in the ``protocol`` folder
+
+        Parameters
+        ---
+        source_folder : str
+            the name of the folder we want to copy from
+        destination_folder : str
+            the name of the folder we want to copy to
+        """
+        destination = os.getcwd() if destination_folder is None else destination_folder
+        root_dir = os.path.abspath(__file__.split("protocol")[0])
+        shutil.copytree(
+            os.path.join(root_dir, "protocol", source_folder), 
+            os.path.join(root_dir, "protocol", destination)
+        ) 
+
+    def copy_file(self, source_file: str, destination_file: str = None) -> None:
+        """copy_file
+
+        copy the files found in the given paths
+        the file will be searched in the ``protocol`` file
+
+        Parameters
+        ---
+        source_file : str
+            the name of the file we want to copy from
+        destination_file : str
+            the name of the file we want to copy to
+        """
+        destination = os.getcwd() if destination_file is None else destination_file
+        root_dir = os.path.abspath(__file__.split("protocol")[0])
+        shutil.copy(
+            os.path.join(root_dir, "protocol", source_file), 
+            os.path.join(root_dir, "protocol", destination)
+        ) 
 
     def move_folder_resources(self, source_path: str, destination_path: str) -> None:
         """move_folder_resources 

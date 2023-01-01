@@ -24,7 +24,7 @@ if __name__ == "__main__":
     print(operating_system_interface.gcu())
     print(operating_system_interface.gcf())
 
-    operating_system_interface.copy_file_from_folder("index.html",source_folder="jaguar")
+    operating_system_interface.copy_file_from_jaguar("index.html", source_folder="jaguar")
 
     oi = OperatingSystemInterface(another_test_folder)
     oi.move_folder_resources(test_folder, another_test_folder)
