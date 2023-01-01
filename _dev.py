@@ -90,7 +90,7 @@ if __name__ == "__main__":
                     osi.copy_file_from_folder("_dev.py")
                     if index + 1 == len(os.listdir(os.path.join(osi.gcu(),"protocol"))):
                         workflow_ui.pp("you can now paste the src.jaguar_backend in directory 😇")
-                        os.system("start code jaguar_backend")
+                        os.system(f'code "" "{os.path.join(osi.gcu(),"protocol","jaguar_backend")}"')
 
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
