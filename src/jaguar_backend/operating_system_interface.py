@@ -2,6 +2,7 @@
 from typing import List, Any, Union, Dict, Optional, Tuple
 import os
 import shutil
+import sys
 
 class OperatingSystemInterface:
     """OperatingSystemInterface is a class
@@ -29,16 +30,21 @@ class OperatingSystemInterface:
         '''signature description'''
         os.chdir(os.getcwd())
       
-    
+    def gcf(self) -> str:
+        """returns the current folder where the file is being run"""
+        if sys.platform == "linux":
+            return __file__.split("protocol")[1].split(r"/")[1]
+        else:
+            return __file__.split("protocol")[1].split(r"\ ".replace(" ",""))[1]
+
     def gcu(self) -> str:
         """gcu has the following params"""
         '''Get the current user i.e. C:/Users/CBE-User 05'''
         return os.path.abspath(__file__).split(r"\protocol")[0]     
                   
-    
     def copy_file_from_folder(self, file : str, source_folder: Optional[str] ="jaguar_backend") -> None:
         """The folder that you are currently working on will be used as destination file
-        The source folder will be searched in the protocol folder and is jaguar by default
+        The source folder will be searched in the protocol folder and is jaguar_backend by default
         the file which will be replace in the local directory has path 
         ``os.path.join(self.directory,file)``
         
@@ -48,7 +54,7 @@ class OperatingSystemInterface:
         file str
             the file that we want to move to the root directory from the source_folder
         source_folder : str
-            the folder where the file will be searched, this is jaguar by default
+            the folder where the file will be searched, this is jaguar_backend by default
         
         Returns
         ---
@@ -56,7 +62,7 @@ class OperatingSystemInterface:
         """
 
         source = os.path.join(os.path.abspath(__file__).split(
-            r"\jaguar")[0], source_folder, file)
+            r"\{}".format(source_folder))[0], source_folder, file)
         destination = os.path.join(self.directory, file)
 
         print(r'''
@@ -65,8 +71,7 @@ class OperatingSystemInterface:
         {}
         '''.format(source, destination))
         print(os.getcwd())
-        shutil.copy(source, destination)
-                          
+        shutil.copy(source, destination)        
     
     def move_folder_resources(self,source_path: str, destination_path : str) -> None:
         """move_folder_resources 
@@ -89,7 +94,6 @@ class OperatingSystemInterface:
             source_dir = os.path.join(source_path, resource)
             os.rename(source_dir, destination_dir)
                           
-    
     def read_word_in_directory(self, word : str) -> 'list[str]':
         """read_word_in_directory has the following params
         
@@ -122,4 +126,3 @@ class OperatingSystemInterface:
                         result.append(file)
 
         return result
-                          

@@ -22,10 +22,11 @@ if __name__ == "__main__":
     operating_system_interface = OperatingSystemInterface(test_folder)
 
     print(operating_system_interface.gcu())
+    print(operating_system_interface.gcf())
 
-    operating_system_interface.copy_file_from_folder("index.html")
+    operating_system_interface.copy_file_from_folder("index.html",source_folder="jaguar")
 
-    oi =  OperatingSystemInterface(another_test_folder)
+    oi = OperatingSystemInterface(another_test_folder)
     oi.move_folder_resources(test_folder, another_test_folder)
 
     osi = OperatingSystemInterface(another_test_folder)

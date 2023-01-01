@@ -52,7 +52,7 @@ classDiagram
 Improve developer experience through jaguar
 
 - [ ] Make it work on any OS out of the box
-- [ ] Test your code
+- [x] Test your code
 - [ ] getting a config file, this can be fetched from the web
 - [ ] building a virtual environment automatically and installing all the dependencies
 - [ ] making the current repository a git repository and push the first commit

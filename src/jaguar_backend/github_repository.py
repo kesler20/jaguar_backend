@@ -1,7 +1,8 @@
-
+from pathlib import Path
+import os
 from typing import List, Any, Union, Dict, Optional, Tuple
 from dataclasses import dataclass
-from jaguar_backend._types import *
+from jaguar_backend.file import File
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
@@ -10,7 +11,126 @@ from random import randint
 class GithubRepository:
     """GithubRepository is a class"""
 
-    workflow_ui = WorkflowRepresentation()
+    def __init__(self) -> None:
+        self.workflow_ui = WorkflowRepresentation()
+        # init session
+        self.__set_up()
+
+    def __set_up(self) -> None:
+        """The setup method is run once at the start of the session to
+        set the root directory as the default repository for github"""
+        os.system("gh repo set-default")
+
+    def run_tests(self,args: List[str]):
+        """runs the tests found within the repository
+        
+        Parameters
+        ---
+        args : List[str]
+            the last parameter is whether you want to
+            run manual tests or not
+            ``["_dev.py","test","py","manual"]``
+        
+        Example
+        ---
+        to run manual tests        
+        ```bash
+        python _dev.py "test" "py" "manual" "jaguar_backend"  
+        ```
+        
+        to run automatic tests
+        ```bash
+        python _dev.py "test" "py"
+        ```
+
+        Returns
+        ---
+        None
+        """
+        _type = args[2]
+        if _type == "py":
+            if len(args) > 3:
+                self.workflow_ui.pp("running manual tests in python 🐍 🧪 ⚙️")
+                manual_test_folder = os.path.join(
+                    __file__.split("jaguar_backend")[0],
+                    "jaguar_backend",
+                    "tests"
+                )
+                if len(args) > 4:
+                    manual_test_folder = os.path.join(
+                        __file__.split("protocol")[0],
+                        "protocol",
+                        args[4],
+                        "tests"
+                    )
+
+                test_passed = []
+                for test_file in os.listdir(manual_test_folder):
+                    try:
+                        print(os.path.join(manual_test_folder,test_file))
+                        self.workflow_ui.pp(f"running the following test {test_file}")
+                        os.system(f"python {os.path.join(manual_test_folder,test_file)}")
+                        self.workflow_ui.pp(f"test passed at {test_file} ✅")
+                        test_passed.append(test_file)
+                        for test_file_passed in test_passed:
+                            print("passed the following tests ✅",test_file_passed)
+                    except:
+                        self.workflow_ui.pp("ERROR found in:",test_file)
+                        self.workflow_ui.pp(f"test passed at {test_file} ❌")
+            else:
+                self.workflow_ui.pp("running automatic tests in python 🐍 🧪 🤖")
+                os.system("python pytest tests")
+        else:
+            self.workflow_ui.pp("running javascript tests using npm ☕ 🧪")
+            os.system("npm tests")
+
+    def create_issue(self, title: str, detail: Optional[str] = None) -> None:
+        print(title)
+        if detail is None:
+            os.system(f'gh issue create --title "{title}" --body "{title}"')
+        else:
+            os.system(f'gh issue create --title "{title}" --body "{detail}"')
+
+    def read_issues(self) -> List[str]:
+        os.system("gh issue list")
+
+    def close_issues(self, from_val: int, to_val: int) -> None:
+        for issueID in range(from_val, to_val + 1):
+            os.system(f"gh issue close {issueID}")
+
+    def close_issue(self, issueID: int) -> None:
+        os.system(f"gh issue close {issueID}")
+
+    def create_issues_from_readme(self):
+        readme = File(Path("README.md"))
+        uncompleted_todos = readme.read_line_by_condition(lambda line: line.startswith("- [ ]"))
+        for todo in uncompleted_todos:
+            todo = todo.replace("- [ ] ", "")
+            todo = todo.replace("\n", "")
+            self.create_issue(todo)
+
+    def read_todos_from_readme(self):
+        readme = File(Path("README.md"))
+        uncompleted_todos = readme.read_line_by_condition(lambda line: line.startswith("- [ ]"))
+        completed_todos = readme.read_line_by_condition(lambda line: line.startswith("- [x]"))
+        for todos in completed_todos:
+            title = todos.replace("- [x] ", "")
+            print(f"✅ {title}")
+            print("")
+        for todos in uncompleted_todos:
+            title = todos.replace("- [ ] ", "")
+            print(f"❌ {title}")
+            print("")
+
+    def cross_todos_from_readme(self,title: str):
+        readme = File(Path("README.md"))
+        readme_content = readme.readlines()
+        readme.write("")
+        for line in readme_content:
+            line = line.replace("\n", "")
+            if line.find(title) != -1:
+                line = line.replace("[ ]", "[x]")
+            readme.append(line)
 
     def test_and_push_to_github(self, args: List[str]) -> None:
         '''test_and_push_to_github will:

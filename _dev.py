@@ -13,11 +13,11 @@ try:
     from src.jaguar_backend.github_repository import GithubRepository
     from src.jaguar_backend._base import WorkflowRepresentation
 except ModuleNotFoundError: 
-    from operating_system_interface import OperatingSystemInterface
-    from amplify_application import AmplifyApplication
-    from react_application import ReactApplication
-    from github_repository import GithubRepository
-    from _base import WorkflowRepresentation
+    from jaguar_backend.operating_system_interface import OperatingSystemInterface
+    from jaguar_backend.amplify_application import AmplifyApplication
+    from jaguar_backend.react_application import ReactApplication
+    from jaguar_backend.github_repository import GithubRepository
+    from jaguar_backend._base import WorkflowRepresentation
 
 if __name__ == "__main__":
     osi = OperatingSystemInterface()
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     workflow_ui = WorkflowRepresentation()
 
     if len(sys.argv) > 1:
-        
+
         if sys.argv[1] == "git":
             if len(sys.argv) > 2:
                 if sys.argv[2] == "t":
@@ -84,12 +84,39 @@ if __name__ == "__main__":
                     osi.copy_file_from_folder("_dev.py")
 
         elif sys.argv[1] == "test":
-            workflow_ui.run_tests(sys.argv)
+            git.run_tests(sys.argv)
             
         elif sys.argv[1] == "-h":
             with open(os.path.join(osi.gcu(),"protocol","jaguar","commands.txt"), "r") as f:
                 for line in f.readlines():
                     print(line)
+        
+        elif sys.argv[1] == "issue":
+            if sys.argv[2] == "create":
+                git.create_issue(sys.argv[3], sys.argv[4])
+        
+            elif sys.argv[2] == "read":
+                git.read_issues()
+            
+            elif sys.argv[2] == "close":
+                # ["_dev.py","issue","close","from_val","to_val"]
+                if len(sys.argv) > 2:
+                    git.close_issues(int(sys.argv[3]), int(sys.argv[4]))
+                else:
+                    git.close_issue(sys.argv[3])
+        
+        elif sys.argv[1] == "readme":
+            if sys.argv[2] == "create":
+                git.create_issues_from_readme()
+            if sys.argv[2] == "read":
+                git.read_todos_from_readme()
+            if sys.argv[2] == "cross":
+                git.cross_todos_from_readme(sys.argv[3])
+            else:
+                workflow_ui.pp("apply the following methods to interact with the readme 📰")
+                print("create -> to create issues from the readme")
+                print("read -> to check all the readme todos")
+                print("cross -> tick all the todos that have been completed by passing their title")
 
         else:
             # if no domain is passed this will be pushed to github
