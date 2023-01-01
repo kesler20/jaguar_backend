@@ -88,6 +88,7 @@ if __name__ == "__main__":
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
                     osi.copy_file_from_folder("_dev.py")
+                    osi.copy_file_from_folder(os.path.join("src","jaguar_backend"))
 
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
