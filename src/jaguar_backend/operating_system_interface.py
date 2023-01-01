@@ -103,7 +103,14 @@ class OperatingSystemInterface:
         {}
         '''.format(source, destination))
         print(os.getcwd())
-        shutil.copytree(source, destination)
+        try:
+            shutil.copytree(source, destination)
+        except FileExistsError as err:
+            print(err)
+            print("reinstalling the folder...⚙️")
+            shutil.rmtree(destination)
+            shutil.copytree(source, destination)
+
 
     def move_folder_resources(self, source_path: str, destination_path: str) -> None:
         """move_folder_resources 
