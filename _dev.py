@@ -87,8 +87,12 @@ if __name__ == "__main__":
                     pass
                 else:
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(),"protocol", dir))
-                    osi.copy_file_from_folder("_dev.py")
-                    osi.copy_file_from_folder(os.path.join("src","jaguar_backend"))
+                    try:
+                        osi.copy_file_from_folder("_dev.py")
+                        osi.copy_file_from_folder(os.path.join("src","jaguar_backend"))
+                    except PermissionError as err:
+                        workflow_ui.pp(f"ERROR ❌ when installing at {dir}")
+                        print(err)
 
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
