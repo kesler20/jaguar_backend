@@ -56,11 +56,14 @@ if __name__ == "__main__":
                         git.close_issues(int(sys.argv[4]), int(sys.argv[5]))
                     else:
                         git.close_issue(sys.argv[4])
-                elif sys.argv[3] == "describe":
-                    # ["_dev.py","github","issue","describe","description",("repository_name")]
-                    git.add_description_to_repo(sys.argv[4])
-                    if len(sys.argv) > 5:
-                        git.add_description_to_repo(sys.argv[4], sys.argv[5])
+            elif sys.argv[2] == "describe":
+                # ["_dev.py","github","issue","describe","description",("repository_name")]
+                git.add_description_to_repo(sys.argv[3])
+                if len(sys.argv) > 4:
+                    git.add_description_to_repo(sys.argv[3], sys.argv[4])
+            else:
+                print("issue")
+                print("describe")
 
         elif sys.argv[1] == "readme":
             if sys.argv[2] == "create":
