@@ -118,10 +118,8 @@ if __name__ == "__main__":
                     
                     with OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir)) as op_sys:
                         try:
-                            # op_sys.system("rmdir /S /Q jaguar_backend")
-                            # op_sys.system("rmdir /S /Q src")
-                            op_sys.mkdir("src")
-                            op_sys.mkdir(os.path.join("src", "jaguar_backend"))
+                            op_sys.system("rmdir /S /Q jaguar_backend")
+                            op_sys.system("rmdir /S /Q src")
                         except FileExistsError: 
                             pass
 

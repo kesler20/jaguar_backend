@@ -107,7 +107,7 @@ class OperatingSystemInterface:
             shutil.copytree(source, destination)
         except FileExistsError as err:
             print(err)
-            print("reinstalling the folder...⚙️")
+            print("copying the folder again...⚙️")
             shutil.rmtree(destination)
             shutil.copytree(source, destination)
 
