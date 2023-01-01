@@ -1,15 +1,14 @@
+from jaguar_backend.operating_system_interface import OperatingSystemInterface
 from pathlib import Path
 import os
 from typing import List, Any, Union, Dict, Optional, Tuple
-from dataclasses import dataclass
 from jaguar_backend.file import File
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
-
-@dataclass
 class GithubRepository:
-    """GithubRepository is a class"""
+    """GithubRepository is a class which allows you to
+    both use the ``git`` and the ``gh`` cli tool"""
 
     def __init__(self) -> None:
         self.workflow_ui = WorkflowRepresentation()
@@ -20,6 +19,15 @@ class GithubRepository:
         """The setup method is run once at the start of the session to
         set the root directory as the default repository for github"""
         os.system("gh repo set-default")
+
+    def add_description_to_repo(self,description: str, repo: Optional[str] =None):
+        """add a description to the given repo"""
+        if repo is None:
+            osi = OperatingSystemInterface()
+            repo = osi.gcf()
+        print(f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
+        os.system(f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
+        print(f"https://github.com/kesler20/{repo}")
 
     def run_tests(self,args: List[str]):
         """runs the tests found within the repository

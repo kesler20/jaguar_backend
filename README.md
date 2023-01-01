@@ -51,9 +51,9 @@ classDiagram
 
 Improve developer experience through jaguar
 
-- [ ] Make it work on any OS out of the box
+- [x] Make it work on any OS out of the box
 - [x] Test your code
-- [ ] getting a config file, this can be fetched from the web
+- [x] getting a config file, this can be fetched from the web
 - [ ] building a virtual environment automatically and installing all the dependencies
 - [ ] making the current repository a git repository and push the first commit
 - [ ] generating a readme with a custom text
@@ -62,8 +62,8 @@ Improve developer experience through jaguar
 - [ ] Turn all the js files to ts files
 - [ ] Generate the gitignore, looking at the file extention or the file name
 - [ ] Include various github controls command such as branching
-- [ ] create a function to turn this to-do list into issues
-- [ ] allow for crud operations on github issues
+- [x] create a function to turn this to-do list into issues
+- [x] allow for crud operations on github issues
 
 To setup github cli on a linux machine
 

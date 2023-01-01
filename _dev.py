@@ -34,6 +34,12 @@ if __name__ == "__main__":
                     git.test_and_push_to_github(sys.argv)
                 elif sys.argv[2] == "init":
                     git.push_new_repo_to_github(sys.argv)
+                elif sys.argv[2] == "describe":
+                    # ["_dev.py","git","describe","description",("repository_name")]
+                    git.add_description_to_repo(sys.argv[3])
+                    if len(sys.argv) > 4:
+                        git.add_description_to_repo(sys.argv[3],sys.argv[4])
+
                 else:
                     git.push_new_branch_to_github(sys.argv)
             else:
@@ -100,7 +106,7 @@ if __name__ == "__main__":
             
             elif sys.argv[2] == "close":
                 # ["_dev.py","issue","close","from_val","to_val"]
-                if len(sys.argv) > 2:
+                if len(sys.argv) > 4:
                     git.close_issues(int(sys.argv[3]), int(sys.argv[4]))
                 else:
                     git.close_issue(sys.argv[3])
