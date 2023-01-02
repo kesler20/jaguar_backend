@@ -54,14 +54,14 @@ Improve developer experience through jaguar
 - [x] Make it work on any OS out of the box
 - [x] Test your code
 - [x] getting a config file, this can be fetched from the web
-- [ ] building a virtual environment automatically and installing all the dependencies
+- [x] building a virtual environment automatically and installing all the dependencies
 - [x] making the current repository a git repository and push the first commit
-- [ ] generating a readme with a custom text
-- [ ] Generate .env file in python or typescript
-- [ ] Set up a typescript project
-- [ ] Turn all the js files to ts files
-- [ ] Generate the gitignore, looking at the file extention or the file name
-- [ ] Include various github controls command such as branching
+- [x] generating a readme with a custom text
+- [x] Generate .env file in python or typescript
+- [x] Set up a typescript project
+- [x] Turn all the js files to ts files
+- [x] Generate the gitignore, looking at the file extention or the file name
+- [x] Include various github controls command such as branching
 - [x] create a function to turn this to-do list into issues
 - [x] allow for crud operations on github issues
 
@@ -95,12 +95,12 @@ gh repo edit https://github.com/kesler20/betting_bot , --description "a script t
 
 ### A list of potential improvements
 
-- [ ] Create issues automatically on the repo from the cli
+- [x] Create issues automatically on the repo from the cli
 - [x] Resolve those issues
-- [ ] Read those issues and you can print them nicely on the cli
-- [ ] Merge a new-feature branch onto the main and delete the new feature branch automatically when all the tests are passed
-- [ ] Allow the user to call the help function from their repo, this can be implemented by either using the get requests in python and exposing the service of the cli using fastapi other things like files can also be accessed like this
-- [ ] Can you get the list of repos that you have on github from the cli tool
+- [x] Read those issues and you can print them nicely on the cli
+- [x] Merge a new-feature branch onto the main and delete the new feature branch automatically when all the tests are passed
+- [x] Allow the user to call the help function from their repo, this can be implemented by either using the get requests in python and exposing the service of the cli using fastapi other things like files can also be accessed like this
+- [x] Can you get the list of repos that you have on github from the cli tool
 - [x] make it easy to build an application from the given templates
 
 ### Dev Workflow
