@@ -3,7 +3,7 @@ from typing import List, Any, Union, Dict, Optional, Tuple
 import os
 import shutil
 import sys
-
+from src.jaguar_backend._base import WorkflowRepresentation
 
 class OperatingSystemInterface:
     """OperatingSystemInterface is a class
@@ -21,6 +21,7 @@ class OperatingSystemInterface:
 
     def __init__(self, directory=os.getcwd()) -> None:
         self.directory: str = directory
+        self.workflow_ui = WorkflowRepresentation()
 
     def __enter__(self) -> os:
         '''signature description'''
@@ -156,6 +157,25 @@ class OperatingSystemInterface:
             os.path.join(root_dir, "protocol", source_file),
             os.path.join(root_dir, "protocol", destination)
         )
+    
+    def convert_javascript_files_to_typescript(self):
+        """convert_javascript_files_to_typescript"""
+        
+        directory = os.path.join(os.getcwd(), "src")
+        for root, directories, files in os.walk(directory):
+            for file in files:
+                file = os.path.join(root, file)
+                if file.endswith(".js"):
+                    os.rename(file, file.replace(".js", ".ts"))
+    
+    def initialise_typescript_environment(self):
+        """initialise_typescript_environment"""
+        
+        self.workflow_ui.pp("install typescript as a development dependency 🌃⏬")
+        os.system("npm i typescript --d")
+        self.workflow_ui.pp("install the typescript compiler 🖨️🌃")
+        os.system("npm i ts-node --d")
+        os.system("npx tsc --init")
 
     def move_folder_resources(self, source_path: str, destination_path: str) -> None:
         """move_folder_resources 
@@ -186,16 +206,22 @@ class OperatingSystemInterface:
         content = {}
         for root, directories, files in os.walk(directory):
             for file in files:
-                with open(os.path.join(directory, file)) as f:
-                    print(os.path.join(directory, file))
-                    file_content = f.read()
-                    file_content = file_content.replace(old_word,new_word)
-                    content[os.path.join(directory, file)] = file_content
+                try:
+                    with open(os.path.join(directory, file)) as f:
+                        print(os.path.join(directory, file),"✅")
+                        file_content = f.read()
+                        file_content = file_content.replace(old_word,new_word)
+                        content[os.path.join(directory, file)] = file_content
+                except:
+                    print(os.path.join(directory, file),"❌")
                 
         for root, directories, files in os.walk(directory):
             for file in files:
                 with open(os.path.join(directory, file), "w") as f:
-                    f.write(content[os.path.join(directory, file)])
+                    try:
+                        f.write(content[os.path.join(directory, file)])
+                    except KeyError:
+                        pass 
 
     def read_word_in_directory(self, word: str) -> 'list[str]':
         """read_word_in_directory has the following params

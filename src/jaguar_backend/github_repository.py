@@ -152,21 +152,34 @@ class GithubRepository:
 
     def generate_gitignore(self):
         root_dir = os.path.abspath(__file__.split("protocol")[0])
+
+        self.workflow_ui.pp("initializing the node environment 🟢NJS")
+        os.system("npm init")
+        self.workflow_ui.pp("install the generate-gitignore globally and generate the gitignore 🔶.gitignore")
+        os.system("npm install --global generate generate-gitignore")
+        os.system("gen gitignore")
+
         with open(os.path.join(
             root_dir,
             "protocol",
             "jaguar",
             "git_ignore",
             ".gitignore"
-        ), "r") as read_file, open(".gitignore", "w") as write_file:
-            content = read_file.read()
-            write_file.write(content)
-            write_file.write("# mqtt client credentials")
-        
+        ), "r") as read_file, open(".gitignore", "a") as write_file:
+            content = read_file.readlines()
+            write_file.writelines(content)
+            write_file.write("# mqtt client credentials\n")
+
         # append the mqtt credentials files
         with open(".gitignore", "a") as append_file:
-            for file_name in os.listdir(os.path.join(root_dir, "protocol", "jaguar", "test_iot_client_credentials")):
+            for file_name in os.listdir(os.path.join(
+                root_dir,
+                "protocol",
+                "jaguar",
+                "test_iot_client_credentials"
+            )):
                 append_file.write(f"{file_name}\n")
+        os.system("del package.json") 
 
     def change_visibility(self, visibility: str):
         os.system(f"gh repo edit --visibility {visibility}")

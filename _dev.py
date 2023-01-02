@@ -192,10 +192,8 @@ if __name__ == "__main__":
                 os.system("git clone https://github.com/kesler20/test_setup")
                 application_dir = os.path.join(os.getcwd(),"test_setup")
                 op_sys = OperatingSystemInterface(application_dir)
-                op_sys.replace_word_in_folder("pub_sub",sys.argv[3],application_dir)
-                os.chdir(application_dir)
-                os.system("pip install -e .")
-                os.chdir(os.getcwd())
+                os.system(f"rename test_setup {sys.argv[3]}")
+
             else:
                 workflow_ui.pp("creating a new javascript application from its template ☕✨")
                 os.system("git clone https://github.com/kesler20/rta_template")
@@ -203,6 +201,17 @@ if __name__ == "__main__":
                 os.chdir(application_dir)
                 os.system("npm install")
                 os.chdir(os.getcwd())
+                os.system(f"rename rta_template {sys.argv[3]}")
+        
+        elif sys.argv[1] == "typescript":
+            if sys.argv[2] == "init":
+                osi.initialise_typescript_environment()
+            elif sys.argv[2] == "convert":
+                osi.convert_javascript_files_to_typescript()
+            else:
+                print("init")
+                print("convert")
+        
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
