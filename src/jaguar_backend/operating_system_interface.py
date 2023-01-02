@@ -1,4 +1,4 @@
-
+import re
 from typing import List, Any, Union, Dict, Optional, Tuple
 import os
 import shutil
@@ -111,6 +111,12 @@ class OperatingSystemInterface:
             shutil.rmtree(destination)
             shutil.copytree(source, destination)
 
+    def delete_folder(self,folder:str):
+        root_dir = os.path.abspath(__file__.split("protocol")[0])
+        folder = os.path.join(root_dir, "protocol", folder)
+        print("deleting the following folder 🗑️",folder)
+        os.system(f"rmdir /S /Q {folder}")
+    
     def copy_folder(self, source_folder: str, destination_folder: str = None) -> None:
         """copy_folder
 
@@ -127,9 +133,9 @@ class OperatingSystemInterface:
         destination = os.getcwd() if destination_folder is None else destination_folder
         root_dir = os.path.abspath(__file__.split("protocol")[0])
         shutil.copytree(
-            os.path.join(root_dir, "protocol", source_folder), 
+            os.path.join(root_dir, "protocol", source_folder),
             os.path.join(root_dir, "protocol", destination)
-        ) 
+        )
 
     def copy_file(self, source_file: str, destination_file: str = None) -> None:
         """copy_file
@@ -147,9 +153,9 @@ class OperatingSystemInterface:
         destination = os.getcwd() if destination_file is None else destination_file
         root_dir = os.path.abspath(__file__.split("protocol")[0])
         shutil.copy(
-            os.path.join(root_dir, "protocol", source_file), 
+            os.path.join(root_dir, "protocol", source_file),
             os.path.join(root_dir, "protocol", destination)
-        ) 
+        )
 
     def move_folder_resources(self, source_path: str, destination_path: str) -> None:
         """move_folder_resources 
@@ -171,6 +177,25 @@ class OperatingSystemInterface:
             destination_dir = os.path.join(destination_path, resource)
             source_dir = os.path.join(source_path, resource)
             os.rename(source_dir, destination_dir)
+
+    def replace_word_in_folder(self, old_word: str, new_word: str, directory: str):
+        """replace_word_in_folder
+        this method will replace every instance of the old word in the given directory with
+        the new word
+        """
+        content = {}
+        for root, directories, files in os.walk(directory):
+            for file in files:
+                with open(os.path.join(directory, file)) as f:
+                    print(os.path.join(directory, file))
+                    file_content = f.read()
+                    file_content = file_content.replace(old_word,new_word)
+                    content[os.path.join(directory, file)] = file_content
+                
+        for root, directories, files in os.walk(directory):
+            for file in files:
+                with open(os.path.join(directory, file), "w") as f:
+                    f.write(content[os.path.join(directory, file)])
 
     def read_word_in_directory(self, word: str) -> 'list[str]':
         """read_word_in_directory has the following params

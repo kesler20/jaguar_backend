@@ -137,7 +137,7 @@ class GithubRepository:
 
     def view_repository(self):
         os.system("gh repo view --web")
-    
+
     def add_topic_to_repo(self, topic: str):
         os.system(f"gh repo edit --add-topic {topic}")
         osi = OperatingSystemInterface()
@@ -149,7 +149,25 @@ class GithubRepository:
         osi = OperatingSystemInterface()
         repo = osi.gcf()
         print(f"https://github.com/kesler20/{repo}")
-    
+
+    def generate_gitignore(self):
+        root_dir = os.path.abspath(__file__.split("protocol")[0])
+        with open(os.path.join(
+            root_dir,
+            "protocol",
+            "jaguar",
+            "git_ignore",
+            ".gitignore"
+        ), "r") as read_file, open(".gitignore", "w") as write_file:
+            content = read_file.read()
+            write_file.write(content)
+            write_file.write("# mqtt client credentials")
+        
+        # append the mqtt credentials files
+        with open(".gitignore", "a") as append_file:
+            for file_name in os.listdir(os.path.join(root_dir, "protocol", "jaguar", "test_iot_client_credentials")):
+                append_file.write(f"{file_name}\n")
+
     def change_visibility(self, visibility: str):
         os.system(f"gh repo edit --visibility {visibility}")
         osi = OperatingSystemInterface()
@@ -172,14 +190,14 @@ class GithubRepository:
 
     def close_issue(self, issueID: int) -> None:
         os.system(f"gh issue close {issueID}")
-    
+
     def integrate_new_branch(self) -> None:
         """integrate_new_branch
-        
+
         Note
         ---
         before running this method make sure that all the tests are passing
-        
+
         this method will:
         1. checkout to master
         2. pull the latest changes
@@ -192,12 +210,12 @@ class GithubRepository:
         """
         self.workflow_ui.pp("checking out to master to pull the latest changed ⏬")
         os.system("git checkout master")
-        os.system("git branch") 
+        os.system("git branch")
         os.system("git pull origin master")
         self.workflow_ui.pp("checking out to new-feature to pull the latest changed ⏬⏬")
         self.workflow_ui.pp("")
         os.system("git checkout new-feature")
-        os.system("git branch") 
+        os.system("git branch")
         os.system("git pull")
         os.system("git add .")
         os.system('git commit -m "ready to merge"')
@@ -205,7 +223,7 @@ class GithubRepository:
         self.workflow_ui.pp("checking out to master to merge the new changes 👯‍♂️⭐💱")
         self.workflow_ui.pp("")
         os.system("git checkout master")
-        os.system("git branch") 
+        os.system("git branch")
         os.system("git merge new-feature")
         self.workflow_ui.pp("pushing the master with the new feature ⤴️🤩✨")
         self.workflow_ui.pp("")

@@ -36,6 +36,8 @@ if __name__ == "__main__":
                     git.push_new_repo_to_github(sys.argv)
                 elif sys.argv[2] == "merge":
                     git.integrate_new_branch()
+                elif sys.argv[2] == "gitignore":
+                    git.generate_gitignore()
                 else:
                     git.push_new_branch_to_github(sys.argv)
             else:
@@ -130,7 +132,7 @@ if __name__ == "__main__":
             if sys.argv[2] == "init":
                 react.initialise_npm_process(sys.argv)
             elif sys.argv[2] == "config":
-                react.initialise_env_file(sys.argv)
+                react.initialise_env_file()
             else:
                 print(
                     'running python workflow.py "react" "config" will paste the .env file in the root dir')
@@ -149,16 +151,14 @@ if __name__ == "__main__":
                 if dir == "jaguar_backend":
                     pass
                 else:
+                    # with OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir)) as op_sys:
+                    #     try:
+                    #         op_sys.system("rmdir /S /Q interfaces")
+                    #         op_sys.system("del workflow.py")
+                    #     except FileExistsError:
+                    #         pass
                     osi = OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir))
                     osi.copy_file_from_jaguar("_dev.py")
-
-                    with OperatingSystemInterface(os.path.join(osi.gcu(), "protocol", dir)) as op_sys:
-                        try:
-                            op_sys.system("rmdir /S /Q jaguar_backend")
-                            op_sys.system("rmdir /S /Q src")
-                        except FileExistsError:
-                            pass
-
                     osi.copy_folder_from_jaguar(os.path.join("src", "jaguar_backend"))
                     if index + 1 == len(os.listdir(os.path.join(osi.gcu(), "protocol"))):
                         workflow_ui.pp("Installation completed 😇")
@@ -175,6 +175,9 @@ if __name__ == "__main__":
                 else:
                     osi.copy_folder(sys.argv[3])
 
+        elif sys.argv[1] == "delete":
+            osi.delete_folder(sys.argv[2])
+            
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
 
@@ -182,7 +185,24 @@ if __name__ == "__main__":
             with open(os.path.join(osi.gcu(), "protocol", "jaguar", "commands.txt"), "r") as f:
                 for line in f.readlines():
                     print(line)
-
+        
+        elif sys.argv[1] == "create-app":
+            if sys.argv[2] == "py":
+                workflow_ui.pp("creating a new python application from its template 🐍✨")
+                os.system("git clone https://github.com/kesler20/test_setup")
+                application_dir = os.path.join(os.getcwd(),"test_setup")
+                op_sys = OperatingSystemInterface(application_dir)
+                op_sys.replace_word_in_folder("pub_sub",sys.argv[3],application_dir)
+                os.chdir(application_dir)
+                os.system("pip install -e .")
+                os.chdir(os.getcwd())
+            else:
+                workflow_ui.pp("creating a new javascript application from its template ☕✨")
+                os.system("git clone https://github.com/kesler20/rta_template")
+                application_dir = os.path.join(os.getcwd(),"rta_template")
+                os.chdir(application_dir)
+                os.system("npm install")
+                os.chdir(os.getcwd())
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
