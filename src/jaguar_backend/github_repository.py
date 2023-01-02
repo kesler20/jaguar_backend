@@ -259,7 +259,7 @@ class GithubRepository:
             self.workflow_ui.pp("running tests using pytest 🐍🧪")
             os.system("python -m pytest src/tests")
             self.workflow_ui.pp("checking that the system is type safe 👩‍🚀 🐍")
-            os.system("mypy src")
+            os.system("python -m mypy src")
 
         self.workflow_ui.pp("formatting code using prettier ✨")
         os.system("prettier -w .")
