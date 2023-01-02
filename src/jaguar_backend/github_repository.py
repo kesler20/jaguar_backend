@@ -175,28 +175,41 @@ class GithubRepository:
     
     def integrate_new_branch(self) -> None:
         """integrate_new_branch
+        
+        Note
+        ---
+        before running this method make sure that all the tests are passing
+        
         this method will:
         1. checkout to master
         2. pull the latest changes
         3. checkout to the new-feature branch
         4. pull the latest changes
-        5. run the tests and check if the system is type safe
         6. merge the new-feature to master
         7. push to master
         8. delete the branch locally
         9. delete the branch origin
         """
-        self.workflow_ui.pp()
+        self.workflow_ui.pp("checking out to master to pull the latest changed ⏬")
         os.system("git checkout master")
         os.system("git branch") 
         os.system("git pull origin master")
+        self.workflow_ui.pp("checking out to new-feature to pull the latest changed ⏬⏬")
         os.system("git checkout new-feature")
         os.system("git branch") 
         os.system("git pull")
+        os.system("git add .")
+        os.system('git commit -m "ready to merge"')
+        os.system('git push --set-upstream origin new-feature')
+        self.workflow_ui.pp("checking out to master to merge the new changes 👯‍♂️⭐💱")
         os.system("git checkout master")
         os.system("git branch") 
         os.system("git merge new-feature")
+        self.workflow_ui.pp("pushing the master with the new feature ⤴️🤩✨")
+        os.system("git add .")
+        os.system('git commit -m "merged new-feature"')
         os.system("git push origin master")
+        self.workflow_ui.pp("deleting the new-feature branch locally and on gh🎯🗑️")
         os.system("git branch -d new-feature")
         os.system("git push origin --delete new-feature")
 
