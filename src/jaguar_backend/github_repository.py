@@ -193,6 +193,8 @@ class GithubRepository:
         os.system("git checkout new-feature")
         os.system("git branch") 
         os.system("git pull")
+        os.system("git checkout master")
+        os.system("git branch") 
         os.system("git merge new-feature")
         os.system("git push origin master")
         os.system("git branch -d new-feature")
