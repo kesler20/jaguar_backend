@@ -61,9 +61,40 @@ if __name__ == "__main__":
                 git.add_description_to_repo(sys.argv[3])
                 if len(sys.argv) > 4:
                     git.add_description_to_repo(sys.argv[3], sys.argv[4])
+            
+            elif sys.argv[2] == "repos":
+                if sys.argv[3] == "number":
+                    git.list_repositories(number=sys.argv[4])
+                elif sys.argv[3] == "language":
+                    git.list_repositories(language=sys.argv[4])
+                elif sys.argv[3] == "topic":
+                    git.list_repositories(topic=sys.argv[4])
+                elif sys.argv[3] == "visibility":
+                    git.list_repositories(visibility=sys.argv[4])
+                else:
+                    # [dev.py,github,repos]
+                    if len(sys.argv) < 3:
+                        git.list_repositories()
+                    
+            elif sys.argv[2] == "view":
+                git.view_repository()
+            
+            elif sys.argv[2] == "topic":
+                if sys.argv[3] == "add":
+                    git.add_topic_to_repo(sys.argv[4])
+                elif sys.argv[3] == "remove":
+                    git.remove_topic_to_repo(sys.argv[4])
+                else:
+                    print("add")
+                    print("remove")
+            elif sys.argv[2] == "visibility":
+                git.change_visibility(sys.argv[3])
+            
             else:
                 print("issue")
                 print("describe")
+                print("repos")
+                print("view")
 
         elif sys.argv[1] == "readme":
             if sys.argv[2] == "create":

@@ -6,6 +6,7 @@ from jaguar_backend.file import File
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
+
 class GithubRepository:
     """GithubRepository is a class which allows you to
     both use the ``git`` and the ``gh`` cli tool"""
@@ -20,7 +21,7 @@ class GithubRepository:
         set the root directory as the default repository for github"""
         os.system("gh repo set-default")
 
-    def add_description_to_repo(self,description: str, repo: Optional[str] =None):
+    def add_description_to_repo(self, description: str, repo: Optional[str] = None):
         """add a description to the given repo"""
         if repo is None:
             osi = OperatingSystemInterface()
@@ -29,23 +30,23 @@ class GithubRepository:
         os.system(f'gh repo edit https://github.com/kesler20/{repo} --description "{description}"')
         print(f"https://github.com/kesler20/{repo}")
 
-    def run_tests(self,args: List[str]):
+    def run_tests(self, args: List[str]):
         """runs the tests found within the repository
-        
+
         Parameters
         ---
         args : List[str]
             the last parameter is whether you want to
             run manual tests or not
             ``["_dev.py","test","py","manual"]``
-        
+
         Example
         ---
         to run manual tests        
         ```bash
         python _dev.py "test" "py" "manual" "jaguar_backend"  
         ```
-        
+
         to run automatic tests
         ```bash
         python _dev.py "test" "py"
@@ -75,15 +76,15 @@ class GithubRepository:
                 test_passed = []
                 for test_file in os.listdir(manual_test_folder):
                     try:
-                        print(os.path.join(manual_test_folder,test_file))
+                        print(os.path.join(manual_test_folder, test_file))
                         self.workflow_ui.pp(f"running the following test {test_file}")
                         os.system(f"python {os.path.join(manual_test_folder,test_file)}")
                         self.workflow_ui.pp(f"test passed at {test_file} ✅")
                         test_passed.append(test_file)
                         for test_file_passed in test_passed:
-                            print("passed the following tests ✅",test_file_passed)
+                            print("passed the following tests ✅", test_file_passed)
                     except:
-                        self.workflow_ui.pp("ERROR found in:",test_file)
+                        self.workflow_ui.pp("ERROR found in:", test_file)
                         self.workflow_ui.pp(f"test passed at {test_file} ❌")
             else:
                 self.workflow_ui.pp("running automatic tests in python 🐍 🧪 🤖")
@@ -91,6 +92,69 @@ class GithubRepository:
         else:
             self.workflow_ui.pp("running javascript tests using npm ☕ 🧪")
             os.system("npm tests")
+
+    def list_repositories(
+        self,
+        number: Optional[int] = None,
+        language: Optional[str] = None,
+        topic: Optional[str] = None,
+        visibility: Optional[str] = None
+    ) -> None:
+        """list_repositories
+        this method allows to list repositories and filter them depending on conditions
+
+        Parameters
+        ---
+        number : Optional[int] = None
+            the number of repos to list
+        language : Optional[str] = None
+            the primary language of the repos that you want to display 
+        topic : Optional[str] = None
+            the topic to use to filter the repos
+        visibility : Optional[str] = None
+            filter the repos by visibility (private or public)
+
+        Returns
+        --
+        None
+        """
+        self.workflow_ui.pp("checking the repos 🥂")
+        if number is not None:
+            print(f"gh repo list --limit {number} kesler20")
+            os.system(f"gh repo list --limit {number} kesler20")
+        if language is not None:
+            print(f"gh repo list kesler20 --language {language}")
+            os.system(f"gh repo list kesler20 --language {language}")
+        if topic is not None:
+            print(f"gh repo list kesler20 --topic {topic}")
+            os.system(f"gh repo list kesler20 --topic {topic}")
+        if visibility is not None:
+            print(f"gh repo list kesler20 --visibility {visibility}")
+            os.system(f"gh repo list kesler20 --visibility {visibility}")
+        if number is None and language is None and topic is None and visibility is None:
+            print("gh repo list kesler20")
+            os.system("gh repo list kesler20")
+
+    def view_repository(self):
+        os.system("gh repo view --web")
+    
+    def add_topic_to_repo(self, topic: str):
+        os.system(f"gh repo edit --add-topic {topic}")
+        osi = OperatingSystemInterface()
+        repo = osi.gcf()
+        print(f"https://github.com/kesler20/{repo}")
+
+    def remove_topic_to_repo(self, topic: str):
+        os.system(f"gh repo edit --remove-topic {topic}")
+        osi = OperatingSystemInterface()
+        repo = osi.gcf()
+        print(f"https://github.com/kesler20/{repo}")
+    
+    def change_visibility(self, visibility: str):
+        os.system(f"gh repo edit --visibility {visibility}")
+        osi = OperatingSystemInterface()
+        repo = osi.gcf()
+        print(f"https://github.com/kesler20/{repo}")
 
     def create_issue(self, title: str, detail: Optional[str] = None) -> None:
         print(title)
@@ -130,7 +194,7 @@ class GithubRepository:
             print(f"❌ {title}")
             print("")
 
-    def cross_todos_from_readme(self,title: str):
+    def cross_todos_from_readme(self, title: str):
         readme = File(Path("README.md"))
         readme_content = readme.readlines()
         readme.write("")
@@ -194,7 +258,7 @@ class GithubRepository:
         if _type == "py":
             self.workflow_ui.pp("running tests using pytest 🐍🧪")
             os.system("python -m pytest src/tests")
-            self.workflow_ui.pp("checking that the system is type safe 👩‍🚀 🐍") 
+            self.workflow_ui.pp("checking that the system is type safe 👩‍🚀 🐍")
             os.system("mypy src")
 
         self.workflow_ui.pp("formatting code using prettier ✨")
@@ -208,10 +272,10 @@ class GithubRepository:
             os.system(
                 f'git commit -m "{self.__style_commit_message(commit_message)}"')
             os.system("git push ")
-            os.system("echo https://github.com/kesler20?tab=repositories") 
+            os.system("echo https://github.com/kesler20?tab=repositories")
         else:
             self.workflow_ui.pp("workflow completed without pushing ❌")
-            os.system("echo https://github.com/kesler20?tab=repositories") 
+            os.system("echo https://github.com/kesler20?tab=repositories")
 
     def push_to_github(self, args: List[str]) -> None:
         """push_to_github has the following params
@@ -235,7 +299,7 @@ class GithubRepository:
         os.system(
             f'git commit -m "{self.__style_commit_message(commit_message)}"')
         os.system("git push ")
-        os.system("echo https://github.com/kesler20?tab=repositories") 
+        os.system("echo https://github.com/kesler20?tab=repositories")
 
     def push_new_repo_to_github(self, args: List[str]) -> None:
         """push_new_repo_to_github has the following params
@@ -274,7 +338,7 @@ class GithubRepository:
             f'git commit -m "{self.__style_commit_message("c add new feature")}"')
         self.workflow_ui.pp("publishing the new branch to github ⌚")
         os.system(f"git push --set-upstream origin new-feature")
-        os.system("echo https://github.com/kesler20?tab=repositories") 
+        os.system("echo https://github.com/kesler20?tab=repositories")
 
     def __style_commit_message(self, commit_message: str) -> str:
         """style_commit_message has the following params
