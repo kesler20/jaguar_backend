@@ -44,6 +44,15 @@ class OperatingSystemInterface:
         '''Get the current user i.e. C:/Users/CBE-User 05'''
         return os.path.abspath(__file__).split(r"\protocol")[0]
 
+    def create_a_virtualenvironment(self, venv: str):
+        """create_a_virtualenvironment"""
+        
+        os.system("pip freeze > requirements.txt")
+        os.system("pip install virtualenv")
+        os.system(f"virtualenv {venv}")
+        os.system(f"source {venv}/bin/activate")
+        os.system("pip install -r requirements.txt") 
+
     def copy_file_from_jaguar(self, file: str, source_folder: Optional[str] = "jaguar_backend") -> None:
         """The folder that you are currently working on will be used as destination file
         The source folder will be searched in the protocol folder and is jaguar_backend by default
@@ -112,12 +121,12 @@ class OperatingSystemInterface:
             shutil.rmtree(destination)
             shutil.copytree(source, destination)
 
-    def delete_folder(self,folder:str):
+    def delete_folder(self, folder: str):
         root_dir = os.path.abspath(__file__.split("protocol")[0])
         folder = os.path.join(root_dir, "protocol", folder)
-        print("deleting the following folder 🗑️",folder)
+        print("deleting the following folder 🗑️", folder)
         os.system(f"rmdir /S /Q {folder}")
-    
+
     def copy_folder(self, source_folder: str, destination_folder: str = None) -> None:
         """copy_folder
 
@@ -157,20 +166,20 @@ class OperatingSystemInterface:
             os.path.join(root_dir, "protocol", source_file),
             os.path.join(root_dir, "protocol", destination)
         )
-    
+
     def convert_javascript_files_to_typescript(self):
         """convert_javascript_files_to_typescript"""
-        
+
         directory = os.path.join(os.getcwd(), "src")
         for root, directories, files in os.walk(directory):
             for file in files:
                 file = os.path.join(root, file)
                 if file.endswith(".js"):
                     os.rename(file, file.replace(".js", ".ts"))
-    
+
     def initialise_typescript_environment(self):
         """initialise_typescript_environment"""
-        
+
         self.workflow_ui.pp("install typescript as a development dependency 🌃⏬")
         os.system("npm i typescript --d")
         self.workflow_ui.pp("install the typescript compiler 🖨️🌃")
@@ -205,23 +214,21 @@ class OperatingSystemInterface:
         """
         content = {}
         for root, directories, files in os.walk(directory):
-            for file in files:
-                try:
-                    with open(os.path.join(directory, file)) as f:
-                        print(os.path.join(directory, file),"✅")
-                        file_content = f.read()
-                        file_content = file_content.replace(old_word,new_word)
-                        content[os.path.join(directory, file)] = file_content
-                except:
-                    print(os.path.join(directory, file),"❌")
-                
+            try:
+                for file in files:
+                    file = os.path.join(root, file)
+                    with open(file, "r") as f:
+                        content[file] = f.read().replace(old_word, new_word)
+            except:
+                pass
         for root, directories, files in os.walk(directory):
-            for file in files:
-                with open(os.path.join(directory, file), "w") as f:
-                    try:
-                        f.write(content[os.path.join(directory, file)])
-                    except KeyError:
-                        pass 
+            try:
+                for file in files:
+                    file = os.path.join(root, file)
+                    with open(file, "w") as f:
+                        f.write(content[file])
+            except:
+                pass
 
     def read_word_in_directory(self, word: str) -> 'list[str]':
         """read_word_in_directory has the following params

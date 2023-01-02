@@ -6,7 +6,6 @@ from jaguar_backend.file import File
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
-
 class GithubRepository:
     """GithubRepository is a class which allows you to
     both use the ``git`` and the ``gh`` cli tool"""

@@ -55,7 +55,7 @@ Improve developer experience through jaguar
 - [x] Test your code
 - [x] getting a config file, this can be fetched from the web
 - [ ] building a virtual environment automatically and installing all the dependencies
-- [ ] making the current repository a git repository and push the first commit
+- [x] making the current repository a git repository and push the first commit
 - [ ] generating a readme with a custom text
 - [ ] Generate .env file in python or typescript
 - [ ] Set up a typescript project
@@ -96,12 +96,12 @@ gh repo edit https://github.com/kesler20/betting_bot , --description "a script t
 ### A list of potential improvements
 
 - [ ] Create issues automatically on the repo from the cli
-- [ ] Resolve those issues
+- [x] Resolve those issues
 - [ ] Read those issues and you can print them nicely on the cli
 - [ ] Merge a new-feature branch onto the main and delete the new feature branch automatically when all the tests are passed
 - [ ] Allow the user to call the help function from their repo, this can be implemented by either using the get requests in python and exposing the service of the cli using fastapi other things like files can also be accessed like this
 - [ ] Can you get the list of repos that you have on github from the cli tool
-- [ ] make it easy to build an application from the given templates
+- [x] make it easy to build an application from the given templates
 
 ### Dev Workflow
 

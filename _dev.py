@@ -25,9 +25,8 @@ if __name__ == "__main__":
     react = ReactApplication()
     git = GithubRepository()
     workflow_ui = WorkflowRepresentation()
-
+    
     if len(sys.argv) > 1:
-
         if sys.argv[1] == "git":
             if len(sys.argv) > 2:
                 if sys.argv[2] == "t":
@@ -40,6 +39,7 @@ if __name__ == "__main__":
                     git.generate_gitignore()
                 else:
                     git.push_new_branch_to_github(sys.argv)
+
             else:
                 print("try to run one of the following")
                 print("python _dev.py git t py -> to run the tests ")
@@ -65,7 +65,7 @@ if __name__ == "__main__":
                 git.add_description_to_repo(sys.argv[3])
                 if len(sys.argv) > 4:
                     git.add_description_to_repo(sys.argv[3], sys.argv[4])
-            
+
             elif sys.argv[2] == "repos":
                 if sys.argv[3] == "number":
                     git.list_repositories(number=sys.argv[4])
@@ -79,10 +79,10 @@ if __name__ == "__main__":
                     # [dev.py,github,repos]
                     if len(sys.argv) < 3:
                         git.list_repositories()
-                    
+
             elif sys.argv[2] == "view":
                 git.view_repository()
-            
+
             elif sys.argv[2] == "topic":
                 if sys.argv[3] == "add":
                     git.add_topic_to_repo(sys.argv[4])
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                     print("remove")
             elif sys.argv[2] == "visibility":
                 git.change_visibility(sys.argv[3])
-            
+
             else:
                 print("issue")
                 print("describe")
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
         elif sys.argv[1] == "delete":
             osi.delete_folder(sys.argv[2])
-            
+
         elif sys.argv[1] == "test":
             git.run_tests(sys.argv)
 
@@ -185,24 +185,33 @@ if __name__ == "__main__":
             with open(os.path.join(osi.gcu(), "protocol", "jaguar", "commands.txt"), "r") as f:
                 for line in f.readlines():
                     print(line)
-        
+
         elif sys.argv[1] == "create-app":
             if sys.argv[2] == "py":
                 workflow_ui.pp("creating a new python application from its template 🐍✨")
                 os.system("git clone https://github.com/kesler20/test_setup")
-                application_dir = os.path.join(os.getcwd(),"test_setup")
+                application_dir = os.path.join(os.getcwd(), "test_setup")
                 op_sys = OperatingSystemInterface(application_dir)
                 os.system(f"rename test_setup {sys.argv[3]}")
+                op_sys.replace_word_in_folder(
+                    "template",
+                    sys.argv[3],
+                    os.path.join(os.getcwd(), sys.argv[3])
+                )
+                os.rename(
+                    os.path.join(sys.argv[3], "src", "template"),
+                    os.path.join(sys.argv[3], "src", sys.argv[3])
+                )
 
             else:
                 workflow_ui.pp("creating a new javascript application from its template ☕✨")
                 os.system("git clone https://github.com/kesler20/rta_template")
-                application_dir = os.path.join(os.getcwd(),"rta_template")
+                application_dir = os.path.join(os.getcwd(), "rta_template")
                 os.chdir(application_dir)
                 os.system("npm install")
                 os.chdir(os.getcwd())
                 os.system(f"rename rta_template {sys.argv[3]}")
-        
+
         elif sys.argv[1] == "typescript":
             if sys.argv[2] == "init":
                 osi.initialise_typescript_environment()
@@ -211,7 +220,10 @@ if __name__ == "__main__":
             else:
                 print("init")
                 print("convert")
-        
+
+        elif sys.argv[1] == "create-env":
+            osi.create_a_virtualenvironment(sys.argv[2])
+
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
