@@ -25,7 +25,7 @@ if __name__ == "__main__":
     react = ReactApplication()
     git = GithubRepository()
     workflow_ui = WorkflowRepresentation()
-    
+
     if len(sys.argv) > 1:
         if sys.argv[1] == "git":
             if len(sys.argv) > 2:
@@ -202,6 +202,9 @@ if __name__ == "__main__":
                     os.path.join(sys.argv[3], "src", "template"),
                     os.path.join(sys.argv[3], "src", sys.argv[3])
                 )
+                os.chdir(os.path.join(os.getcwd(), sys.argv[3]))
+                os.system("pip install -e .")
+                os.chdir(os.getcwd())
 
             else:
                 workflow_ui.pp("creating a new javascript application from its template ☕✨")
@@ -210,7 +213,7 @@ if __name__ == "__main__":
                 os.chdir(application_dir)
                 os.system("npm install")
                 os.chdir(os.getcwd())
-                os.system(f"rename rta_template {sys.argv[3]}")
+                os.system(f"rename {os.path.join(os.getcwd(),'rta_template')} {os.path.join(os.getcwd(),sys.argv[3])}")
 
         elif sys.argv[1] == "typescript":
             if sys.argv[2] == "init":
