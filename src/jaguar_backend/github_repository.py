@@ -172,6 +172,31 @@ class GithubRepository:
 
     def close_issue(self, issueID: int) -> None:
         os.system(f"gh issue close {issueID}")
+    
+    def integrate_new_branch(self) -> None:
+        """integrate_new_branch
+        this method will:
+        1. checkout to master
+        2. pull the latest changes
+        3. checkout to the new-feature branch
+        4. pull the latest changes
+        5. run the tests and check if the system is type safe
+        6. merge the new-feature to master
+        7. push to master
+        8. delete the branch locally
+        9. delete the branch origin
+        """
+        self.workflow_ui.pp()
+        os.system("git checkout master")
+        os.system("git branch") 
+        os.system("git pull origin master")
+        os.system("git checkout new-feature")
+        os.system("git branch") 
+        os.system("git pull")
+        os.system("git merge new-feature")
+        os.system("git push origin master")
+        os.system("git branch -d new-feature")
+        os.system("git push origin --delete new-feature")
 
     def create_issues_from_readme(self):
         readme = File(Path("README.md"))
