@@ -6,6 +6,7 @@ from jaguar_backend.file import File
 from jaguar_backend._base import WorkflowRepresentation
 from random import randint
 
+
 class GithubRepository:
     """GithubRepository is a class which allows you to
     both use the ``git`` and the ``gh`` cli tool"""
@@ -178,7 +179,7 @@ class GithubRepository:
                 "test_iot_client_credentials"
             )):
                 append_file.write(f"{file_name}\n")
-        os.system("del package.json") 
+        os.system("del package.json")
 
     def change_visibility(self, visibility: str):
         os.system(f"gh repo edit --visibility {visibility}")
