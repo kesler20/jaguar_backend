@@ -34,6 +34,8 @@ if __name__ == "__main__":
                     git.test_and_push_to_github(sys.argv)
                 elif sys.argv[2] == "init":
                     git.push_new_repo_to_github(sys.argv)
+                elif sys.argv[2] == "merge":
+                    git.integrate_new_branch()
                 else:
                     git.push_new_branch_to_github(sys.argv)
             else:

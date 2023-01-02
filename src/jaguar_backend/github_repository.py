@@ -88,7 +88,7 @@ class GithubRepository:
                         self.workflow_ui.pp(f"test passed at {test_file} ❌")
             else:
                 self.workflow_ui.pp("running automatic tests in python 🐍 🧪 🤖")
-                os.system("python pytest tests")
+                os.system("python -m pytest tests")
         else:
             self.workflow_ui.pp("running javascript tests using npm ☕ 🧪")
             os.system("npm tests")
