@@ -394,7 +394,7 @@ class GithubRepository:
         os.system(
             f'git commit -m "{self.__style_commit_message("c first commit")}"')
         self.workflow_ui.pp("now you can publish the branch from VS Code")
-        os.system(f"start code {target_directory}")
+        os.system(f'code "" "{target_directory}"')
 
     def push_new_branch_to_github(self, args: List[str]) -> None:
         """push_new_branch_to_github has the following params
