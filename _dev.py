@@ -34,7 +34,11 @@ if __name__ == "__main__":
                 elif sys.argv[2] == "init":
                     git.push_new_repo_to_github(sys.argv)
                 elif sys.argv[2] == "merge":
-                    git.integrate_new_branch(sys.argv[3])
+                    try:
+                        git.integrate_new_branch(sys.argv[3])
+                    except:
+                        git.integrate_new_branch()
+                        
                 elif sys.argv[2] == "gitignore":
                     git.generate_gitignore()
                 else:
