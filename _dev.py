@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 elif sys.argv[2] == "init":
                     git.push_new_repo_to_github(sys.argv)
                 elif sys.argv[2] == "merge":
-                    git.integrate_new_branch()
+                    git.integrate_new_branch(sys.argv[3])
                 elif sys.argv[2] == "gitignore":
                     git.generate_gitignore()
                 else:
@@ -52,7 +52,11 @@ if __name__ == "__main__":
                     git.create_issue(sys.argv[4], sys.argv[5])
 
                 elif sys.argv[3] == "read":
-                    git.read_issues()
+                    if len(sys.argv) >= 4:
+                        git.read_issues()
+                        # git.read_all_issues_on_github()
+                    else:
+                        git.read_issues()
 
                 elif sys.argv[3] == "close":
                     # ["_dev.py","github","issue","close","from_val","to_val"]
