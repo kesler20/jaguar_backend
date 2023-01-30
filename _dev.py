@@ -238,6 +238,9 @@ if __name__ == "__main__":
         else:
             # if no domain is passed this will be pushed to github
             git.push_to_github(sys.argv)
+        
+    elif sys.argv[1] == "ci":
+        git.test_and_push_to_github("_dev.py","git","t",sys.argv[1:])
 
     else:
         with open(os.path.join(osi.gcu(), "Protocol", "jaguar", "commands.txt"), "r") as f:
